@@ -10,7 +10,7 @@ export default function AppFooter() {
           {' '}
           {new Date().getFullYear()}
           {' '}
-          Englab
+          englab
         </Text>
       </Center>
     </Footer>

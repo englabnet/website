@@ -12,7 +12,7 @@ export default function App() {
       <MantineProvider
         theme={{
           colorScheme,
-          primaryColor: 'orange',
+          primaryColor: 'blue',
           defaultRadius: 'sm',
         }}
         withGlobalStyles

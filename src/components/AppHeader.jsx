@@ -9,7 +9,7 @@ export default function AppHeader() {
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
   const dark = colorScheme === 'dark';
   return (
-    <Header p="sm">
+    <Header p="sm" height={60}>
       <Group position="apart">
         <Group spacing={0}>
           <Text
@@ -18,7 +18,7 @@ export default function AppHeader() {
             variant="gradient"
             gradient={{ from: theme.colors.blue[6], to: theme.colors.blue[4] }}
           >
-            Englab
+            englab
           </Text>
         </Group>
         <ActionIcon
