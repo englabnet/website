@@ -1,47 +1,46 @@
-import React from 'react';
-import {
-  ActionIcon,
-  Box, Grid, SegmentedControl, TextInput, useMantineTheme,
-} from '@mantine/core';
+import React, { useState } from 'react';
+import { Center } from '@mantine/core';
 
-import { useForm } from '@mantine/form';
+import styled, { keyframes } from 'styled-components';
+import SearchBar from '../components/SearchBar';
 
-import { IconSearch } from '@tabler/icons';
+const searchAnimation = keyframes`
+  from {height: 80%}
+  to {height: 95px}
+`;
+
+const AnimatedCenter = styled(Center)`
+  height: 95px;
+  animation-name: ${searchAnimation};
+  animation-duration: 500ms;
+  animation-iteration-count: 1;
+`;
 
 function MainPage() {
-  const theme = useMantineTheme();
-  const form = useForm({
-    initialValues: {
-      phrase: '',
-    },
-  });
+  const [playAnimation, setPlayAnimation] = useState(false);
+  const [searchValues, setSearchValues] = useState();
+
+  const searchHandler = (values) => {
+    setSearchValues(values);
+    setPlayAnimation(true);
+  };
+
+  const searchBar = (
+    <SearchBar delay={500} onSearch={(values) => searchHandler(values)} {...searchValues} />
+  );
 
   return (
-    <Box maw={800} mx="auto">
-      <form onSubmit={form.onSubmit((values) => console.log(values))}>
-        <Grid gutter={6} justify="center" align="flex-end">
-          <Grid.Col span="auto">
-            <TextInput size="50" placeholder="Search for..." />
-          </Grid.Col>
-          <Grid.Col span="content">
-            <ActionIcon
-              variant="gradient"
-              size={50}
-              aria-label="Search"
-              color="primary"
-              gradient={{ from: theme.colors.blue[6], to: theme.colors.blue[4] }}
-            >
-              <IconSearch style={{ width: '60%', height: '60%' }} />
-            </ActionIcon>
-          </Grid.Col>
-        </Grid>
-        <Grid justify="center" align="flex-end">
-          <Grid.Col span="content">
-            <SegmentedControl size="sm" data={['🌎 All', '🇬🇧 UK', '🇺🇸 US', '🇦🇺 AUS']} />
-          </Grid.Col>
-        </Grid>
-      </form>
-    </Box>
+    <div style={{ height: '100%' }}>
+      {playAnimation ? (
+        <AnimatedCenter style={{ height: '95px' }}>
+          {searchBar}
+        </AnimatedCenter>
+      ) : (
+        <Center style={{ height: '80%' }}>
+          {searchBar}
+        </Center>
+      )}
+    </div>
   );
 }
 
