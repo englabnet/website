@@ -69,7 +69,7 @@ function VideoPage() {
       <Center>
         <SearchBar
           phrase={searchParams.get('phrase')}
-          variant={searchParams.get('variant')}
+          variety={searchParams.get('variety')}
           onSearch={(values) => {
             setSearchValues(values);
           }}

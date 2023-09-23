@@ -7,7 +7,7 @@ import { useForm } from '@mantine/form';
 import { createSearchParams, useNavigate } from 'react-router-dom';
 
 function SearchBar({
-  phrase, variant = 'all', onSearch = () => {}, delay = 0,
+  phrase, variety = 'ALL', onSearch = () => {}, delay = 0,
 }) {
   const navigate = useNavigate();
   const theme = useMantineTheme();
@@ -15,7 +15,7 @@ function SearchBar({
   const form = useForm({
     initialValues: {
       phrase: phrase || '',
-      variant: variant || '',
+      variety: variety || '',
     },
   });
 
@@ -55,12 +55,12 @@ function SearchBar({
             <SegmentedControl
               size="sm"
               data={[
-                { label: '🌎 All', value: 'all' },
-                { label: '🇬🇧 UK', value: 'uk' },
-                { label: '🇺🇸 US', value: 'us' },
-                { label: '🇦🇺 AUS', value: 'aus' },
+                { label: '🌎 All', value: 'ALL' },
+                { label: '🇬🇧 UK', value: 'UK' },
+                { label: '🇺🇸 US', value: 'US' },
+                { label: '🇦🇺 AUS', value: 'AUS' },
               ]}
-              {...form.getInputProps('variant')}
+              {...form.getInputProps('variety')}
             />
           </Grid.Col>
         </Grid>
