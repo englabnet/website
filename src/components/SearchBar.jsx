@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  ActionIcon, Box, Grid, SegmentedControl, TextInput, useMantineTheme,
+  ActionIcon, Box, Grid, SegmentedControl, TextInput,
 } from '@mantine/core';
 import { IconSearch } from '@tabler/icons';
 import { useForm } from '@mantine/form';
@@ -10,7 +10,6 @@ function SearchBar({
   phrase, variety = 'ALL', onSearch = () => {}, delay = 0,
 }) {
   const navigate = useNavigate();
-  const theme = useMantineTheme();
 
   const form = useForm({
     initialValues: {
@@ -44,7 +43,6 @@ function SearchBar({
               aria-label="Search"
               color="primary"
               type="submit"
-              gradient={{ from: theme.colors.blue[6], to: theme.colors.blue[4] }}
             >
               <IconSearch style={{ width: '60%', height: '60%' }} />
             </ActionIcon>

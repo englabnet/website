@@ -15,6 +15,8 @@ export default function App() {
           theme={{
             colorScheme,
             primaryColor: 'blue',
+            primaryShade: 5,
+            defaultGradient: { from: 'blue.6', to: 'blue.4' },
             defaultRadius: 'md',
           }}
           withGlobalStyles
@@ -26,7 +28,7 @@ export default function App() {
             footer={(<AppFooter />)}
             styles={(theme) => ({
               main: {
-                backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[9] : theme.colors.gray[1],
+                backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[1],
               },
               root: {
                 height: '100%',

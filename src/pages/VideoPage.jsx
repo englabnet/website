@@ -1,47 +1,54 @@
 import React, { useEffect, useState } from 'react';
 import {
-  Center, Text, Paper, Stack,
+  Center, Paper, Stack,
 } from '@mantine/core';
 
 import axios from 'axios';
 import { useSearchParams } from 'react-router-dom';
 import YouTube from 'react-youtube';
 import SearchBar from '../components/SearchBar';
+import SubtitleBlock from '../components/SubtitleBlock';
 
 function VideoPage() {
   const [searchParams] = useSearchParams();
   const [searchValues, setSearchValues] = useState(searchParams);
-  const [videos, setVideos] = useState(null);
+  const [videos, setVideos] = useState([]);
+  const [timeUpdater, setTimeUpdated] = useState(null);
   const [currentTime, setCurrentTime] = useState(0);
 
   const loadVideo = () => {
     axios.get('http://localhost:8080/api/v1/searcher/search', {
       params: searchValues,
     }).then((r) => {
-      setVideos(r.data);
-      if (r.data) {
-        setCurrentTime(r.data[0].timeFrame.startTime);
+      const data = r.data.videos;
+      if (data[0]) {
+        setCurrentTime(data[0].timeFrame.startTime);
       }
+      setVideos(data);
     });
   };
 
   useEffect(() => {
+    if (timeUpdater) {
+      clearInterval(timeUpdater);
+    }
     loadVideo();
   }, [searchValues]);
 
   const updateCurrentTime = (target) => {
-    setCurrentTime(target.getCurrentTime());
-  };
-
-  const onPlayerStateChange = (event) => {
-    if (event.data === window.YT.PlayerState.PLAYING) {
-      // Call a function every second to update the time
-      setInterval(() => updateCurrentTime(event.target), 100);
+    if (target.getPlayerState() === 1) {
+      setCurrentTime(target.getCurrentTime());
     }
   };
 
+  const onPlayerStateChange = (event) => {
+    // Call a function every 100ms to update the time
+    const id = setInterval(() => updateCurrentTime(event.target), 100);
+    setTimeUpdated(id);
+  };
+
   let videoResults = null;
-  if (videos && videos.length > 0) {
+  if (videos.length > 0) {
     videoResults = (
       <Paper shadow="xs" p="xl" w={800} mx="auto">
         <Center>
@@ -51,15 +58,14 @@ function VideoPage() {
               width: 720,
               height: 405,
               playerVars: {
-                start: videos[0].timeFrame.startTime,
+                start: Math.floor(videos[0].timeFrame.startTime),
                 autoplay: 1,
               },
             }}
-            onStateChange={onPlayerStateChange}
+            onPlay={onPlayerStateChange}
           />
         </Center>
-        <Text>{Math.floor(currentTime)}</Text>
-        <Text>{videos[0].sentence}</Text>
+        <SubtitleBlock subtitles={videos[0].subtitles} currentTime={currentTime} />
       </Paper>
     );
   }
