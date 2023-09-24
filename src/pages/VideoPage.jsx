@@ -13,7 +13,7 @@ function VideoPage() {
   const [searchParams] = useSearchParams();
   const [searchValues, setSearchValues] = useState(searchParams);
   const [videos, setVideos] = useState([]);
-  const [timeUpdater, setTimeUpdated] = useState(null);
+  const [timeUpdater, setTimeUpdater] = useState(null);
   const [currentTime, setCurrentTime] = useState(0);
 
   const loadVideo = () => {
@@ -31,20 +31,22 @@ function VideoPage() {
   useEffect(() => {
     if (timeUpdater) {
       clearInterval(timeUpdater);
+      setTimeUpdater(null);
     }
     loadVideo();
   }, [searchValues]);
 
   const updateCurrentTime = (target) => {
-    if (target.getPlayerState() === 1) {
-      setCurrentTime(target.getCurrentTime());
-    }
+    // comment if (target.getPlayerState() === 1) {
+    setCurrentTime(target.getCurrentTime());
   };
 
   const onPlayerStateChange = (event) => {
     // Call a function every 100ms to update the time
-    const id = setInterval(() => updateCurrentTime(event.target), 100);
-    setTimeUpdated(id);
+    if (!timeUpdater) {
+      const id = setInterval(() => updateCurrentTime(event.target), 100);
+      setTimeUpdater(id);
+    }
   };
 
   let videoResults = null;
