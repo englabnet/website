@@ -21,8 +21,7 @@ function SubtitleBlock({ subtitles, currentTime }) {
       }
     }
     // We found nothing, so let's pick the closest segment.
-    const segment = segments[high];
-    return { prev: segments[high - 1], current: segment, next: segments[high + 1] };
+    return { prev: segments[low - 1], current: segments[low], next: segments[low + 1] };
   };
 
   const segment = binarySearchByTime(currentTime, subtitles);
@@ -35,7 +34,7 @@ function SubtitleBlock({ subtitles, currentTime }) {
       {segment ? (
         <>
           <Text size="xl" mih={31} color={closeSegmentColor}>{segment.prev ? segment.prev.text : null}</Text>
-          <Text size="xl" mih={31} fw={500} color={currentSegmentColor}>{segment.current.text}</Text>
+          <Text size="xl" mih={31} fw={500} color={currentSegmentColor}>{segment.current ? segment.current.text : null}</Text>
           <Text size="xl" mih={31} color={closeSegmentColor}>{segment.next ? segment.next.text : null}</Text>
         </>
       ) : null}
