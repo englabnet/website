@@ -31,7 +31,7 @@ function SubtitleBlock({ subtitles, currentTime }) {
   const closeSegmentColor = colorScheme === 'dark' ? 'blue.8' : 'blue.3';
 
   return (
-    <Stack align="center" style={{ gap: '10px' }}>
+    <Stack align="center" style={{ gap: '10px' }} pt="25px" pb="10px">
       {segment ? (
         <>
           <Text size="xl" mih={31} color={closeSegmentColor}>{segment.prev ? segment.prev.text : null}</Text>

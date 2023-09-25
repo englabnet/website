@@ -5,7 +5,7 @@ export default function AppFooter() {
   return (
     <Footer height="42px" p="sm">
       <Center>
-        <Text size="xs" color="gray">
+        <Text size="xs" c="dimmed">
           Copyright ©
           {' '}
           {new Date().getFullYear()}

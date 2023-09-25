@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import {
-  Center, Paper, Stack,
+  ActionIcon,
+  Center, Group, Paper, Stack, Text,
 } from '@mantine/core';
 
 import axios from 'axios';
 import { useSearchParams } from 'react-router-dom';
 import YouTube from 'react-youtube';
+import { IconChevronLeft, IconChevronRight } from '@tabler/icons';
 import SearchBar from '../components/SearchBar';
 import SubtitleBlock from '../components/SubtitleBlock';
 
 function VideoPage() {
   const [searchParams] = useSearchParams();
   const [searchValues, setSearchValues] = useState(searchParams);
-  const [videos, setVideos] = useState([]);
+  const [response, setResponse] = useState(null);
   const [timeUpdater, setTimeUpdater] = useState(null);
   const [currentTime, setCurrentTime] = useState(0);
 
@@ -20,11 +22,10 @@ function VideoPage() {
     axios.get('http://localhost:8080/api/v1/searcher/search', {
       params: searchValues,
     }).then((r) => {
-      const data = r.data.videos;
-      if (data[0]) {
-        setCurrentTime(data[0].timeFrame.startTime);
+      if (r.data.videos[0]) {
+        setCurrentTime(r.data.videos[0].timeFrame.startTime);
       }
-      setVideos(data);
+      setResponse(r.data);
     });
   };
 
@@ -37,7 +38,6 @@ function VideoPage() {
   }, [searchValues]);
 
   const updateCurrentTime = (target) => {
-    // comment if (target.getPlayerState() === 1) {
     setCurrentTime(target.getCurrentTime());
   };
 
@@ -50,24 +50,34 @@ function VideoPage() {
   };
 
   let videoResults = null;
-  if (videos.length > 0) {
+  if (response && response.videos.length > 0) {
     videoResults = (
-      <Paper shadow="xs" p="xl" w={800} mx="auto">
-        <Center>
-          <YouTube
-            videoId={videos[0].videoId}
-            opts={{
-              width: 720,
-              height: 405,
-              playerVars: {
-                start: Math.floor(videos[0].timeFrame.startTime),
-                autoplay: 1,
-              },
-            }}
-            onPlay={onPlayerStateChange}
-          />
-        </Center>
-        <SubtitleBlock subtitles={videos[0].subtitles} currentTime={currentTime} />
+      <Paper shadow="xs" py="15px" w={800} mx="auto">
+        <Stack align="center">
+          <Text size="xs" c="dimmed">{`1/${response.count}`}</Text>
+          <Group w="100%" style={{ gap: 0 }}>
+            <ActionIcon miw="50px" variant="light" color="gray" mih="393.75px" radius={0} disabled>
+              <IconChevronLeft style={{ width: '60%', height: '60%' }} />
+            </ActionIcon>
+            <YouTube
+              videoId={response.videos[0].videoId}
+              style={{ height: 393.75 }}
+              opts={{
+                width: 700,
+                height: 393.75,
+                playerVars: {
+                  start: Math.floor(response.videos[0].timeFrame.startTime),
+                  autoplay: 1,
+                },
+              }}
+              onPlay={onPlayerStateChange}
+            />
+            <ActionIcon miw="50px" variant="light" color="gray" mih="393.75px" radius={0}>
+              <IconChevronRight style={{ width: '60%', height: '60%' }} />
+            </ActionIcon>
+          </Group>
+        </Stack>
+        <SubtitleBlock subtitles={response.videos[0].subtitles} currentTime={currentTime} />
       </Paper>
     );
   }
