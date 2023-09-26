@@ -39,7 +39,7 @@ function VideoPage() {
       <Stack mt={10}>
         {response && response.videos[0]
           ? <VideoPlayer count={response.count} video={response.videos[0]} />
-          : <Center mih={400}><Text size="xl" c="dimmed">No result 😔</Text></Center>}
+          : <Center mih={400}><Text size="xl" c="dimmed">No result 😢</Text></Center>}
       </Stack>
     </>
   );

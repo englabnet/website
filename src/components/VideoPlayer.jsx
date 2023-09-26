@@ -9,45 +9,28 @@ import SubtitleBlock from './SubtitleBlock';
 
 function VideoPlayer({ count, video }) {
   if (!video) return null;
-  console.log('render!');
+
   const player = useRef(null);
   const intervalId = useRef(null);
   const [currentTime, setCurrentTime] = useState(0);
 
   const { startTime } = video.timeFrame;
-  useEffect(() => {
-    console.log('mount');
-    console.log('set startTime!');
-    if (intervalId.current) {
-      console.log('clearInterval!');
-      clearInterval(intervalId.current);
-      intervalId.current = null;
-    }
-    setCurrentTime(startTime);
-    return () => {
-      console.log('unmount');
-      if (intervalId.current) {
-        console.log('clearInterval!');
-        clearInterval(intervalId.current);
-        intervalId.current = null;
-      }
-    };
-  }, [startTime, intervalId]);
 
-  const onPlayerStateChange = (event) => {
-    // Call a function every 100ms to update the time
-    if (!intervalId.current || player.current !== event.target) {
-      player.current = event.target;
-      console.log('setInterval!');
-      intervalId.current = setInterval(() => {
-        const state = event.target.getPlayerState();
-        if (state === 1 || state === 2) {
-          console.log(event.target.getCurrentTime());
-          setCurrentTime(event.target.getCurrentTime());
-        }
-      }, 100);
+  useEffect(() => {
+    const p = player.current.internalPlayer;
+    setCurrentTime(startTime);
+    p.loadVideoById(video.videoId, startTime);
+    if (intervalId.current) {
+      clearInterval(intervalId.current);
     }
-  };
+    intervalId.current = setInterval(() => {
+      p.getPlayerState().then((state) => {
+        if (state === 1 || state === 2) {
+          p.getCurrentTime().then((time) => setCurrentTime(time));
+        }
+      });
+    }, 100);
+  }, [video]);
 
   return (
     <Paper shadow="xs" py="15px" w={800} mx="auto">
@@ -58,17 +41,12 @@ function VideoPlayer({ count, video }) {
             <IconChevronLeft style={{ width: '60%', height: '60%' }} />
           </ActionIcon>
           <YouTube
-            videoId={video.videoId}
-            style={{ height: 393.75 }}
+            ref={player}
+            style={{ width: 700, height: 393.75 }}
             opts={{
               width: 700,
               height: 393.75,
-              playerVars: {
-                start: Math.floor(video.timeFrame.startTime),
-                autoplay: 1,
-              },
             }}
-            onStateChange={onPlayerStateChange}
           />
           <ActionIcon miw="50px" variant="light" color="gray" mih="393.75px" radius={0}>
             <IconChevronRight style={{ width: '60%', height: '60%' }} />
