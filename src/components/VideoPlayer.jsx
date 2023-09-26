@@ -30,6 +30,11 @@ function VideoPlayer({ count, video }) {
         }
       });
     }, 100);
+    return () => {
+      if (intervalId.current) {
+        clearInterval(intervalId.current);
+      }
+    };
   }, [video]);
 
   return (
