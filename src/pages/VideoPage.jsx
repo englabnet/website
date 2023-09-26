@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
-  Center, Stack, Text,
+  Center, Loader, Stack, Text,
 } from '@mantine/core';
 
 import axios from 'axios';
@@ -25,6 +25,14 @@ function VideoPage() {
     loadVideo();
   }, [searchValues]);
 
+  let content = <Center h={500}><Loader color="gray" size="xl" /></Center>;
+
+  if (response) {
+    content = response.videos.length > 0
+      ? <VideoPlayer count={response.count} video={response.videos[0]} />
+      : <Center mih={500}><Text size="xl" c="dimmed">No result 😢</Text></Center>;
+  }
+
   return (
     <>
       <Center>
@@ -37,9 +45,7 @@ function VideoPage() {
         />
       </Center>
       <Stack mt={10}>
-        {response && response.videos[0]
-          ? <VideoPlayer count={response.count} video={response.videos[0]} />
-          : <Center mih={400}><Text size="xl" c="dimmed">No result 😢</Text></Center>}
+        {content}
       </Stack>
     </>
   );

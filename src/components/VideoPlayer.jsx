@@ -25,7 +25,7 @@ function VideoPlayer({ count, video }) {
     }
     intervalId.current = setInterval(() => {
       p.getPlayerState().then((state) => {
-        if (state === 1 || state === 2) {
+        if (state === 1 || state === 2) { // play or pause
           p.getCurrentTime().then((time) => setCurrentTime(time));
         }
       });

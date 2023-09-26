@@ -5,7 +5,7 @@ import styled, { keyframes } from 'styled-components';
 import SearchBar from '../components/SearchBar';
 
 const searchAnimation = keyframes`
-  from {height: 80%}
+  from {height: 90%}
   to {height: 95px}
 `;
 
@@ -36,7 +36,7 @@ function MainPage() {
           {searchBar}
         </AnimatedCenter>
       ) : (
-        <Center style={{ height: '80%' }}>
+        <Center style={{ height: '90%' }}>
           {searchBar}
         </Center>
       )}
