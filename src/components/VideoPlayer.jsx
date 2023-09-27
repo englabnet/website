@@ -7,7 +7,11 @@ import YouTube from 'react-youtube';
 import { IconChevronLeft, IconChevronRight } from '@tabler/icons';
 import SubtitleBlock from './SubtitleBlock';
 
-function VideoPlayer({ count, video }) {
+function VideoPlayer({
+  index, count, video,
+  disablePrevious = true, disableNext = false,
+  onPrevious = () => {}, onNext = () => {},
+}) {
   if (!video) return null;
 
   const player = useRef(null);
@@ -40,20 +44,33 @@ function VideoPlayer({ count, video }) {
   return (
     <Paper shadow="xs" py="15px" w={800} mx="auto">
       <Stack align="center">
-        <Text size="xs" c="dimmed">{`1/${count}`}</Text>
+        <Text size="xs" c="dimmed">{`${index + 1}/${count}`}</Text>
         <Group w="100%" style={{ gap: 0 }}>
-          <ActionIcon miw="50px" variant="light" color="gray" mih="393.75px" radius={0} disabled>
+          <ActionIcon
+            miw="50px"
+            variant="light"
+            color="gray"
+            mih="393.75px"
+            radius={0}
+            onClick={onPrevious}
+            disabled={disablePrevious}
+          >
             <IconChevronLeft style={{ width: '60%', height: '60%' }} />
           </ActionIcon>
           <YouTube
             ref={player}
             style={{ width: 700, height: 393.75 }}
-            opts={{
-              width: 700,
-              height: 393.75,
-            }}
+            opts={{ width: 700, height: 393.75 }}
           />
-          <ActionIcon miw="50px" variant="light" color="gray" mih="393.75px" radius={0}>
+          <ActionIcon
+            miw="50px"
+            variant="light"
+            color="gray"
+            mih="393.75px"
+            radius={0}
+            onClick={onNext}
+            disabled={disableNext}
+          >
             <IconChevronRight style={{ width: '60%', height: '60%' }} />
           </ActionIcon>
         </Group>

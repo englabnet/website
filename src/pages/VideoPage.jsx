@@ -12,6 +12,7 @@ function VideoPage() {
   const [searchParams] = useSearchParams();
   const [searchValues, setSearchValues] = useState(searchParams);
   const [response, setResponse] = useState(null);
+  const [index, setIndex] = useState(0);
 
   const loadVideo = () => {
     axios.get('http://localhost:8080/api/v1/searcher/search', {
@@ -22,6 +23,7 @@ function VideoPage() {
   };
 
   useEffect(() => {
+    setIndex(0);
     loadVideo();
   }, [searchValues]);
 
@@ -29,7 +31,17 @@ function VideoPage() {
 
   if (response) {
     content = response.videos.length > 0
-      ? <VideoPlayer count={response.count} video={response.videos[0]} />
+      ? (
+        <VideoPlayer
+          index={index}
+          count={response.count}
+          video={response.videos[index]}
+          disablePrevious={index === 0}
+          disableNext={index + 1 === response.count}
+          onPrevious={() => setIndex(index - 1)}
+          onNext={() => setIndex(index + 1)}
+        />
+      )
       : <Center mih={500}><Text size="xl" c="dimmed">No result 😢</Text></Center>;
   }
 
