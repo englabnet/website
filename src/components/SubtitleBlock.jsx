@@ -30,7 +30,8 @@ function SubtitleBlock({ subtitles, currentTime }) {
     if (!segment) return null;
     return segment.text.map((text, index) => {
       if (index % 2) {
-        return <Mark>{text}</Mark>;
+        // eslint-disable-next-line react/no-array-index-key
+        return <Mark key={index}>{text}</Mark>;
       }
       return text;
     });
