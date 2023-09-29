@@ -1,5 +1,7 @@
 import React from 'react';
-import { Stack, Text, useMantineColorScheme } from '@mantine/core';
+import {
+  Mark, Stack, Text, useMantineColorScheme,
+} from '@mantine/core';
 
 function SubtitleBlock({ subtitles, currentTime }) {
   const { colorScheme } = useMantineColorScheme();
@@ -24,18 +26,28 @@ function SubtitleBlock({ subtitles, currentTime }) {
     return { prev: segments[low - 1], current: segments[low], next: segments[low + 1] };
   };
 
-  const segment = binarySearchByTime(currentTime, subtitles);
+  const prepareText = (segment) => {
+    if (!segment) return null;
+    return segment.text.map((text, index) => {
+      if (index % 2) {
+        return <Mark>{text}</Mark>;
+      }
+      return text;
+    });
+  };
+
+  const segments = binarySearchByTime(currentTime, subtitles);
 
   const currentSegmentColor = colorScheme === 'dark' ? 'blue.3' : 'blue.6';
   const closeSegmentColor = colorScheme === 'dark' ? 'blue.8' : 'blue.3';
 
   return (
-    <Stack align="center" style={{ gap: '10px' }} pt="25px" pb="10px">
-      {segment ? (
+    <Stack align="center" style={{ gap: '10px' }} pt="25px" pb="10px" px="50px">
+      {segments ? (
         <>
-          <Text size="xl" mih={31} color={closeSegmentColor}>{segment.prev ? segment.prev.text : null}</Text>
-          <Text size="xl" mih={31} fw={500} color={currentSegmentColor}>{segment.current ? segment.current.text : null}</Text>
-          <Text size="xl" mih={31} color={closeSegmentColor}>{segment.next ? segment.next.text : null}</Text>
+          <Text size="xl" mih={31} ta="center" inline color={closeSegmentColor}>{prepareText(segments.prev)}</Text>
+          <Text size="xl" mih={31} ta="center" inline fw={500} color={currentSegmentColor}>{prepareText(segments.current)}</Text>
+          <Text size="xl" mih={31} ta="center" inline color={closeSegmentColor}>{prepareText(segments.next)}</Text>
         </>
       ) : null}
     </Stack>

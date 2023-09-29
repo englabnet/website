@@ -18,7 +18,7 @@ function VideoPlayer({
   const intervalId = useRef(null);
   const [currentTime, setCurrentTime] = useState(0);
 
-  const { startTime } = video.timeFrame;
+  const { startTime } = video.subtitles[video.index];
 
   useEffect(() => {
     const p = player.current.internalPlayer;
