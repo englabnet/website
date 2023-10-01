@@ -2,9 +2,42 @@ import React from 'react';
 import {
   Mark, Stack, Text, useMantineColorScheme,
 } from '@mantine/core';
+import styled from 'styled-components';
+
+const StyledText = styled(Text)`
+  white-space: nowrap;
+  max-width: 720px;
+  overflow: hidden;
+  display: inline-flex;
+  gap: 4px;
+`;
+
+const TopText = styled(StyledText)`
+  justify-content: flex-end;
+  gap: 4px;
+
+  ${(props) => props.isLong && `
+    mask-image: linear-gradient(to right, transparent, white 20px);
+  `}
+`;
+
+const BottomText = styled(Text)`
+  justify-content: flex-start;
+  gap: 4px;
+
+  ${(props) => props.isLong && `
+    mask-image: linear-gradient(to left, transparent, white 20px);
+  `}
+`;
 
 function SubtitleBlock({ subtitles, currentTime }) {
   const { colorScheme } = useMantineColorScheme();
+
+  const getText = (segment) => {
+    if (!segment) return null;
+    return segment.text;
+  };
+
   const binarySearchByTime = (time, segments) => {
     let low = 0;
     let high = segments.length - 1;
@@ -14,7 +47,11 @@ function SubtitleBlock({ subtitles, currentTime }) {
       const segment = segments[mid];
 
       if (segment.startTime <= time && time <= segment.endTime) {
-        return { prev: segments[mid - 1], current: segment, next: segments[mid + 1] };
+        return {
+          prev: getText(segments[mid - 1]),
+          current: getText(segment),
+          next: getText(segments[mid + 1]),
+        };
       }
       if (segment.startTime > time) {
         high = mid - 1;
@@ -23,32 +60,61 @@ function SubtitleBlock({ subtitles, currentTime }) {
       }
     }
     // We found nothing, so let's pick the closest segment.
-    return { prev: segments[low - 1], current: segments[low], next: segments[low + 1] };
+    return {
+      prev: getText(segments[low - 1]),
+      current: getText(segments[low]),
+      next: getText(segments[low + 1]),
+    };
   };
 
-  const prepareText = (segment) => {
-    if (!segment) return null;
-    return segment.text.map((text, index) => {
-      if (index % 2) {
+  const prepareText = (text) => {
+    if (!text) return null;
+    return text.map((t, i) => {
+      if (i % 2) {
         // eslint-disable-next-line react/no-array-index-key
-        return <Mark key={index}>{text}</Mark>;
+        return <Mark key={i}>{t}</Mark>;
       }
-      return text;
+      return t;
     });
   };
 
-  const segments = binarySearchByTime(currentTime, subtitles);
+  const isLong = (text) => text && text.join().length > 80;
+
+  const text = binarySearchByTime(currentTime, subtitles);
 
   const currentSegmentColor = colorScheme === 'dark' ? 'blue.3' : 'blue.6';
   const closeSegmentColor = colorScheme === 'dark' ? 'blue.8' : 'blue.3';
 
   return (
-    <Stack align="center" style={{ gap: '10px' }} pt="25px" pb="10px" px="50px">
-      {segments ? (
+    <Stack align="center" justify="center" style={{ gap: '5px' }} pt="20px" pb="10px" px="20px" mih={150}>
+      {text ? (
         <>
-          <Text size="xl" mih={31} ta="center" inline color={closeSegmentColor}>{prepareText(segments.prev)}</Text>
-          <Text size="xl" mih={31} ta="center" inline fw={500} color={currentSegmentColor}>{prepareText(segments.current)}</Text>
-          <Text size="xl" mih={31} ta="center" inline color={closeSegmentColor}>{prepareText(segments.next)}</Text>
+          <TopText
+            size="lg"
+            ta="center"
+            lineClamp={1}
+            color={closeSegmentColor}
+            isLong={isLong(text.prev)}
+          >
+            {prepareText(text.prev)}
+          </TopText>
+          <Text
+            size="lg"
+            ta="center"
+            fw={500}
+            color={currentSegmentColor}
+          >
+            {prepareText(text.current)}
+          </Text>
+          <BottomText
+            size="lg"
+            ta="center"
+            lineClamp={1}
+            color={closeSegmentColor}
+            isLong={isLong(text.next)}
+          >
+            {prepareText(text.next)}
+          </BottomText>
         </>
       ) : null}
     </Stack>
