@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  ActionIcon, Box, Grid, SegmentedControl, TextInput,
+  ActionIcon, Box, Grid, Input, SegmentedControl,
 } from '@mantine/core';
 import { IconSearch } from '@tabler/icons';
 import { useForm } from '@mantine/form';
@@ -34,18 +34,25 @@ function SearchBar({
       <form onSubmit={form.onSubmit((values) => submitHandler(values))}>
         <Grid gutter={6} justify="center" align="flex-end">
           <Grid.Col span="auto">
-            <TextInput size="50" placeholder="Search for..." {...form.getInputProps('phrase')} />
-          </Grid.Col>
-          <Grid.Col span="content">
-            <ActionIcon
-              variant="gradient"
-              size={50}
-              aria-label="Search"
-              color="primary"
-              type="submit"
-            >
-              <IconSearch style={{ width: '60%', height: '60%' }} />
-            </ActionIcon>
+            <Input
+              size="50"
+              placeholder="Search for..."
+              radius="xl"
+              {...form.getInputProps('phrase')}
+              rightSectionWidth={54}
+              rightSection={(
+                <ActionIcon
+                  size={50}
+                  w={52}
+                  aria-label="Search"
+                  color="primary"
+                  type="submit"
+                  radius="xl"
+                >
+                  <IconSearch style={{ width: '50%', height: '50%' }} />
+                </ActionIcon>
+              )}
+            />
           </Grid.Col>
         </Grid>
         <Grid justify="center" align="flex-end">
