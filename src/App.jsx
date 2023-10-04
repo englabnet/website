@@ -6,8 +6,12 @@ import AppHeader from './components/AppHeader';
 import AppFooter from './components/AppFooter';
 
 export default function App() {
-  const [colorScheme, setColorScheme] = useState('light');
-  const toggleColorScheme = (value) => setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'));
+  const [colorScheme, setColorScheme] = useState(localStorage.getItem('theme') || 'light');
+  const toggleColorScheme = () => {
+    const theme = colorScheme === 'dark' ? 'light' : 'dark';
+    localStorage.setItem('theme', theme);
+    setColorScheme(theme);
+  };
   return (
     <BrowserRouter>
       <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
