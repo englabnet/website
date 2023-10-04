@@ -30,7 +30,7 @@ function SearchBar({
   };
 
   return (
-    <Box miw={800} mx="auto">
+    <Box miw={700} mx="auto">
       <form onSubmit={form.onSubmit((values) => submitHandler(values))}>
         <Center>
           <Input
