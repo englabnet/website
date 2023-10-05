@@ -47,8 +47,8 @@ function VideoPage() {
           disablePrevious={realIndex === 0}
           disableNext={realIndex + 1 === response.count}
           onPrevious={() => {
-            if (index - 1 === 0 && page !== 0) {
-              loadVideos(realIndex - 11)
+            if (index - 1 === -1 && page !== 0) {
+              loadVideos(realIndex - 10)
                 .then(() => {
                   setPage(page - 1);
                   setIndex(9);
