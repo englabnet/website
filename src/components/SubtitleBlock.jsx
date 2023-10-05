@@ -86,7 +86,7 @@ function SubtitleBlock({ subtitles, currentTime }) {
   const closeSegmentColor = colorScheme === 'dark' ? 'blue.8' : 'blue.3';
 
   return (
-    <Stack align="center" justify="center" style={{ gap: '5px' }} pt="20px" pb="10px" px="20px" mih={150}>
+    <Stack align="center" justify="center" style={{ gap: '5px' }} pt="20px" pb="10px" px="20px" mih={160}>
       {text ? (
         <>
           <TopText
