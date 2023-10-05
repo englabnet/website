@@ -62,7 +62,7 @@ function SearchBar({
                 { label: '🌎 All', value: 'ALL' },
                 { label: '🇬🇧 UK', value: 'UK' },
                 { label: '🇺🇸 US', value: 'US' },
-                { label: '🇦🇺 AUS', value: 'AUS' },
+                // { label: '🇦🇺 AUS', value: 'AUS' },
               ]}
               {...form.getInputProps('variety')}
             />
