@@ -93,6 +93,7 @@ function SubtitleBlock({ subtitles, currentTime }) {
             size="lg"
             ta="center"
             lineClamp={1}
+            mih={30}
             color={closeSegmentColor}
             isLong={isLong(text.prev)}
           >
@@ -101,6 +102,7 @@ function SubtitleBlock({ subtitles, currentTime }) {
           <Text
             size="lg"
             ta="center"
+            mih={30}
             fw={500}
             color={currentSegmentColor}
           >
@@ -109,6 +111,7 @@ function SubtitleBlock({ subtitles, currentTime }) {
           <BottomText
             size="lg"
             ta="center"
+            mih={30}
             lineClamp={1}
             color={closeSegmentColor}
             isLong={isLong(text.next)}
