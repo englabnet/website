@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Header, Text, Group, useMantineColorScheme, ActionIcon, UnstyledButton,
+  Header, Text, Group, useMantineColorScheme, ActionIcon, UnstyledButton, Button, Divider,
 } from '@mantine/core';
 import { IconMoonStars, IconSun } from '@tabler/icons';
 import { useNavigate } from 'react-router-dom';
@@ -23,14 +23,19 @@ export default function AppHeader() {
             </Text>
           </UnstyledButton>
         </Group>
-        <ActionIcon
-          variant="default"
-          color="gray"
-          onClick={() => toggleColorScheme()}
-          title="Toggle color scheme"
-        >
-          {dark ? <IconSun size={18} color="gray" /> : <IconMoonStars size={18} color="gray" />}
-        </ActionIcon>
+        <Group>
+          <Button px={0} variant="transparent" onClick={() => navigate('/feedback')}>Feedback</Button>
+          <Button px={0} variant="transparent" onClick={() => navigate('/about')}>About</Button>
+          <Divider orientation="vertical" />
+          <ActionIcon
+            variant="default"
+            color="gray"
+            onClick={() => toggleColorScheme()}
+            title="Toggle color scheme"
+          >
+            {dark ? <IconSun size={18} color="gray" /> : <IconMoonStars size={18} color="gray" />}
+          </ActionIcon>
+        </Group>
       </Group>
     </Header>
   );
