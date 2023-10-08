@@ -35,7 +35,6 @@ function VideoPage() {
   }, [searchValues]);
 
   let content = <Center h={500}><Loader color="gray" size="xl" /></Center>;
-
   if (response) {
     const realIndex = page * 10 + index;
     content = response.videos.length > 0
