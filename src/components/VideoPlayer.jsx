@@ -12,26 +12,43 @@ function VideoPlayer({
   onPrevious = () => {}, onNext = () => {},
 }) {
   const player = useRef(null);
-  const [currentTime, setCurrentTime] = useState(0);
+  const [url, setUrl] = useState("https://www.youtube.com/watch?v=" + video.videoId);
+  const { startTime } = video.subtitles[video.index];
+  const [currentTime, setCurrentTime] = useState(startTime);
+
+  const videoIdRef = useRef(video.videoId);
+  const startTimeRef = useRef(startTime);
 
   const onReady = () => {
-    const { startTime } = video.subtitles[video.index];
     player.current.seekTo(startTime, 'seconds');
-    setCurrentTime(startTime);
   }
 
   useEffect(() => {
-    onReady();
+    const hasVideoIdChanged = videoIdRef.current !== video.videoId;
+    const hasStartTimeChanged = startTimeRef.current !== startTime;
+
+    if (hasVideoIdChanged) {
+      setUrl("https://www.youtube.com/watch?v=" + video.videoId);
+    } else if (hasStartTimeChanged) {
+      player.current.seekTo(startTime, 'seconds');
+    }
+
+    videoIdRef.current = video.videoId;
+    startTimeRef.current = startTime;
+  }, [startTime, video])
+
+  useEffect(() => {
     const interval = setInterval(() => {
       const currentTime = player.current.getCurrentTime();
-      setCurrentTime(currentTime);
-    }, 100);
+      if (currentTime) {
+        setCurrentTime(currentTime);
+      }
+    }, 200);
 
     return () => {
-      console.log("unmount");
       clearInterval(interval);
     };
-  }, [video]);
+  }, [url]);
 
   return (
     <Paper shadow="xs" py="15px" w={800} mx="auto">
@@ -51,7 +68,7 @@ function VideoPlayer({
           </ActionIcon>
           <ReactPlayer
             ref={player}
-            url={"https://www.youtube.com/watch?v=" + video.videoId}
+            url={url}
             onReady={onReady}
             playing
             controls

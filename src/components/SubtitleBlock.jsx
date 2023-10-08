@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import {
   Mark, Stack, Text, useMantineColorScheme,
 } from '@mantine/core';
@@ -16,7 +16,7 @@ const TopText = styled(StyledText)`
   justify-content: flex-end;
   gap: 4px;
 
-  ${(props) => props.isLong && `
+  ${(props) => props.$short && `
     mask-image: linear-gradient(to right, transparent, white 20px);
   `}
 `;
@@ -25,7 +25,7 @@ const BottomText = styled(Text)`
   justify-content: flex-start;
   gap: 4px;
 
-  ${(props) => props.isLong && `
+  ${(props) => props.$short && `
     mask-image: linear-gradient(to left, transparent, white 20px);
   `}
 `;
@@ -78,7 +78,7 @@ function SubtitleBlock({ subtitles, currentTime }) {
     });
   };
 
-  const isLong = (text) => text && text.join().length > 80;
+  const isTextLong = (text) => text && text.join().length > 80;
 
   const text = binarySearchByTime(currentTime, subtitles);
 
@@ -95,7 +95,7 @@ function SubtitleBlock({ subtitles, currentTime }) {
             lineClamp={1}
             mih={30}
             color={closeSegmentColor}
-            isLong={isLong(text.prev)}
+            $short={isTextLong(text.prev)}
           >
             {prepareText(text.prev)}
           </TopText>
@@ -114,7 +114,7 @@ function SubtitleBlock({ subtitles, currentTime }) {
             mih={30}
             lineClamp={1}
             color={closeSegmentColor}
-            isLong={isLong(text.next)}
+            $short={isTextLong(text.next)}
           >
             {prepareText(text.next)}
           </BottomText>
@@ -124,4 +124,9 @@ function SubtitleBlock({ subtitles, currentTime }) {
   );
 }
 
-export default SubtitleBlock;
+function areEqual(prevProps, nextProps) {
+  // Return true if props are equal, otherwise return false
+  return prevProps.currentTime === nextProps.currentTime;
+}
+
+export default memo(SubtitleBlock, areEqual);
