@@ -1,53 +1,46 @@
-import React, { useState } from 'react';
-import { AppShell, ColorSchemeProvider, MantineProvider } from '@mantine/core';
+import React from 'react';
+import '@mantine/core/styles.css';
+import { AppShell, MantineProvider } from '@mantine/core';
 import { BrowserRouter } from 'react-router-dom';
 import Router from './Router';
-import AppHeader from './components/AppHeader';
-import AppFooter from './components/AppFooter';
+import AppHeader from './components/header/AppHeader.jsx';
+
+import styled from '@emotion/styled';
+import AppFooter from "./components/footer/AppFooter.jsx";
+
+const StyledMain = styled(AppShell.Main)`
+  background-color: var(--mantine-color-background);
+`;
+
+const resolver = (theme) => ({
+  light: {
+    '--mantine-color-background': theme.colors.gray[1],
+  },
+  dark: {
+    '--mantine-color-background': theme.colors.dark[8],
+  },
+});
 
 export default function App() {
-  const [colorScheme, setColorScheme] = useState(localStorage.getItem('theme') || 'light');
-  const toggleColorScheme = () => {
-    const theme = colorScheme === 'dark' ? 'light' : 'dark';
-    localStorage.setItem('theme', theme);
-    setColorScheme(theme);
-  };
   return (
     <BrowserRouter>
-      <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
-        <MantineProvider
-          theme={{
-            colorScheme,
-            primaryColor: 'blue',
-            primaryShade: 5,
-            defaultGradient: { from: 'blue.6', to: 'blue.4' },
-            defaultRadius: 'md',
-          }}
-          withGlobalStyles
-          withNormalizeCSS
-        >
-          <AppShell
-            fixed={false}
-            header={(<AppHeader />)}
-            footer={(<AppFooter />)}
-            styles={(theme) => ({
-              main: {
-                backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[1],
-              },
-              root: {
-                height: '100%',
-                display: 'flex',
-                flexFlow: 'column',
-              },
-              body: {
-                flexGrow: 1,
-              },
-            })}
-          >
+      <MantineProvider
+        theme={{
+          fontFamily: 'Roboto, sans-serif',
+          primaryColor: 'blue',
+          defaultGradient: { from: 'blue.6', to: 'blue.4' },
+          defaultRadius: 'md',
+        }}
+        cssVariablesResolver={resolver}
+      >
+        <AppShell header={{ height: 60 }} footer={{ height: 60 }}>
+          <AppHeader />
+          <StyledMain>
             <Router />
-          </AppShell>
-        </MantineProvider>
-      </ColorSchemeProvider>
+          </StyledMain>
+          <AppFooter />
+        </AppShell>
+      </MantineProvider>
     </BrowserRouter>
   );
 }

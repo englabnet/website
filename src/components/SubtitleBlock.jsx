@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import {
   Mark, Stack, Text, useMantineColorScheme,
 } from '@mantine/core';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 
 const StyledText = styled(Text)`
   white-space: nowrap;

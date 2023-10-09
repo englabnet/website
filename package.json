@@ -10,18 +10,17 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@emotion/react": "^11.10.5",
-    "@mantine/core": "^5.8.0",
-    "@mantine/form": "^7.0.0",
-    "@mantine/hooks": "^5.8.0",
-    "@tabler/icons": "^1.96.0",
-    "axios": "1.5.0",
+    "@emotion/react": "^11.11.1",
+    "@mantine/core": "^7.1.2",
+    "@mantine/form": "^7.1.2",
+    "@mantine/hooks": "^7.1.2",
+    "@tabler/icons-react": "^2.38.0",
+    "axios": "1.5.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-player": "^2.13.0",
     "react-router-dom": "^6.16.0",
-    "react-youtube": "10.1.0",
-    "styled-components": "^5.3.5"
+    "@emotion/styled": "^11.11.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",

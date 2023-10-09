@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import {
   ActionIcon, Group, Paper, Stack, Text,
 } from '@mantine/core';
-import { IconChevronLeft, IconChevronRight } from '@tabler/icons';
+import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react';
 import SubtitleBlock from './SubtitleBlock';
 import ReactPlayer from "react-player";
 

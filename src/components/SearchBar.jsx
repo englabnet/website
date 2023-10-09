@@ -2,7 +2,7 @@ import React from 'react';
 import {
   ActionIcon, Box, Center, Grid, Input, SegmentedControl,
 } from '@mantine/core';
-import { IconSearch } from '@tabler/icons';
+import { IconSearch } from '@tabler/icons-react';
 import { useForm } from '@mantine/form';
 import { createSearchParams, useNavigate } from 'react-router-dom';
 
@@ -35,17 +35,18 @@ function SearchBar({
         <Center>
           <Input
             w="100%"
-            size="50"
+            size="xl"
             placeholder="Search for..."
             radius="xl"
             {...form.getInputProps('phrase')}
             rightSectionWidth={54}
+            rightSectionPointerEvents="all"
             rightSection={(
               <ActionIcon
                 size={50}
-                w={52}
+                w={50}
                 aria-label="Search"
-                color="primary"
+                variant="transparent"
                 type="submit"
                 radius="xl"
               >

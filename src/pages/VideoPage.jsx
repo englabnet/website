@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import {
   Center, Loader, Stack, Text,
 } from '@mantine/core';
-
 import axios from 'axios';
 import { useSearchParams } from 'react-router-dom';
 import SearchBar from '../components/SearchBar';
@@ -74,7 +73,7 @@ function VideoPage() {
 
   return (
     <>
-      <Center>
+      <Center pt={10}>
         <SearchBar
           phrase={searchParams.get('phrase')}
           variety={searchParams.get('variety')}
@@ -83,7 +82,7 @@ function VideoPage() {
           }}
         />
       </Center>
-      <Stack mt={10}>
+      <Stack pt={10}>
         {content}
       </Stack>
     </>

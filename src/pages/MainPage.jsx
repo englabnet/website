@@ -1,19 +1,21 @@
 import React, { useState } from 'react';
 import { Center } from '@mantine/core';
 
-import styled, { keyframes } from 'styled-components';
+import styled from '@emotion/styled';
+import { keyframes } from '@emotion/react';
 import SearchBar from '../components/SearchBar';
 
 const searchAnimation = keyframes`
   from {height: 90%}
-  to {height: 95px}
+  to {height: 120px}
 `;
 
 const AnimatedCenter = styled(Center)`
-  height: 95px;
+  height: 120px;
   animation-name: ${searchAnimation};
   animation-duration: 500ms;
   animation-iteration-count: 1;
+  animation-fill-mode: forwards;
 `;
 
 function MainPage() {
@@ -30,7 +32,7 @@ function MainPage() {
   );
 
   return (
-    <div style={{ height: '100%' }}>
+    <div style={{ height: '90dvh' }}>
       {playAnimation ? (
         <AnimatedCenter style={{ height: '95px' }}>
           {searchBar}

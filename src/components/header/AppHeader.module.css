@@ -1,0 +1,16 @@
+.logo {
+  text-decoration: none;
+}
+
+.link {
+  display: block;
+  line-height: 1;
+  border-radius: var(--mantine-radius-sm);
+  padding: 8px 12px;
+  text-decoration: none;
+  color: var(--mantine-primary-color-light-color);
+}
+
+.link:hover {
+  background-color: var(--mantine-color-default-hover);
+}
