@@ -35,7 +35,7 @@ function SearchBar({
         <Center>
           <Input
             w="100%"
-            size="xl"
+            size="lg"
             placeholder="Search for..."
             radius="xl"
             {...form.getInputProps('phrase')}

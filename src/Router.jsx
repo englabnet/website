@@ -6,6 +6,7 @@ import VideoPage from './pages/VideoPage';
 import TermPage from './pages/TermPage';
 import AboutPage from './pages/AboutPage';
 import FeedbackPage from './pages/FeedbackPage';
+import NotFoundPage from "./pages/NotFoundPage.jsx";
 
 export default function Router() {
   return (
@@ -15,6 +16,7 @@ export default function Router() {
       <Route exact path="/feedback" element={<FeedbackPage />} />
       <Route exact path="/about" element={<AboutPage />} />
       <Route exact path="/terms" element={<TermPage />} />
+      <Route path='*' element={<NotFoundPage />} status={404}/>
     </Routes>
   );
 }

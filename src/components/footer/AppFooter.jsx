@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Center, AppShell, Stack, Text,
+  AppShell, Stack, Text,
 } from '@mantine/core';
 import { Link } from 'react-router-dom';
 import classes from './AppFooter.module.css';
