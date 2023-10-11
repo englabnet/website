@@ -15,7 +15,7 @@ function VideoPlayer({
   const [url, setUrl] = useState("https://www.youtube.com/watch?v=" + video.videoId);
 
   // startTime - 1 is just a small adjustment to make sure that the phrase will appear in the video
-  const startTime = video.subtitles[video.index].startTime - 1;
+  const startTime = Math.floor(video.subtitles[video.index].startTime);
   const [currentTime, setCurrentTime] = useState(startTime);
 
   const videoIdRef = useRef(video.videoId);
