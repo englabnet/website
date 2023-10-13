@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import classes from './AppHeader.module.css';
 
 const links = [
+  { link: '/', label: 'Search' },
   { link: '/feedback', label: 'Feedback' },
   { link: '/about', label: 'About' },
 ];

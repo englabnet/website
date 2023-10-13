@@ -27,6 +27,9 @@ export default function App() {
       <MantineProvider
         theme={{
           fontFamily: 'Roboto, sans-serif',
+          headings: {
+            fontFamily: 'Gabarito, Roboto, sans-serif'
+          },
           primaryColor: 'blue',
           defaultGradient: { from: 'blue.6', to: 'blue.4' },
           defaultRadius: 'md',

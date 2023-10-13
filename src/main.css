@@ -1,0 +1,5 @@
+@font-face {
+  font-family: "Gabarito";
+  src: local("Gabarito-Regular"),
+  url("./fonts/gabarito/Gabarito-Regular.ttf") format("truetype");
+}

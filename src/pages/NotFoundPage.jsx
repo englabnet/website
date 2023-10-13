@@ -1,10 +1,8 @@
 import React from 'react';
-import { Text } from '@mantine/core';
+import { Center, Text } from '@mantine/core';
 
 export default function NotFoundPage() {
   return (
-    <Text>
-      404 Not Found
-    </Text>
+    <Center mih={700}><Text size="xl" c="dimmed">This page doesn&apos;t exist 😱</Text></Center>
   );
 }
