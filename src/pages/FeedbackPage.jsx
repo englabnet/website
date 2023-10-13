@@ -21,7 +21,7 @@ function FeedbackPage() {
   });
 
   return (
-    <Paper shadow="xs" p="20px" w={450} mx="auto" mt={10}>
+    <Paper shadow="xs" p="30px" w={500} mx="auto" mt={10}>
       <Title order={2}>Leave feedback</Title>
       <Space h="md" />
       <Text size='sm'>
@@ -58,7 +58,7 @@ function FeedbackPage() {
                 { label: '🎥 suggest a new video', value: 'VIDEO' },
                 { label: '🐣 suggest a new feature', value: 'FEATURE' },
                 { label: '🐞 report a bug', value: 'BUG' },
-                { label: 'write something else', value: 'OTHER' },
+                { label: '✍️ write something else', value: 'OTHER' },
               ]}
               {...form.getInputProps('type')}
             />
