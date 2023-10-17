@@ -27,7 +27,6 @@ function FeedbackPage() {
   const [errorShown, errorHandlers] = useDisclosure(false);
 
   const sendFeedback = (values) => {
-    console.log(values);
     axios
       .post('http://localhost:8081/api/v1/feedback', values)
       .then(() => {
@@ -72,10 +71,10 @@ function FeedbackPage() {
               allowDeselect={false}
               defaultValue={'suggest a new video'}
               data={[
-                { label: '🎥 suggest a new video', value: 'VIDEO' },
-                { label: '🐣 suggest a new feature', value: 'FEATURE' },
-                { label: '🐞 report a bug', value: 'BUG' },
-                { label: '✍️ write something else', value: 'OTHER' },
+                { label: '🎥  suggest a new video', value: 'VIDEO' },
+                { label: '🐣  suggest a new feature', value: 'FEATURE' },
+                { label: '🐞  report a bug', value: 'BUG' },
+                { label: '✍️  write something else', value: 'OTHER' },
               ]}
               {...form.getInputProps('type')}
             />
