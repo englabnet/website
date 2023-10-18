@@ -2,33 +2,7 @@ import React, { memo } from 'react';
 import {
   Mark, Stack, Text, useMantineColorScheme,
 } from '@mantine/core';
-import styled from '@emotion/styled';
-
-const StyledText = styled(Text)`
-  white-space: nowrap;
-  max-width: 720px;
-  overflow: hidden;
-  display: inline-flex;
-  gap: 4px;
-`;
-
-const TopText = styled(StyledText)`
-  justify-content: flex-end;
-  gap: 4px;
-
-  ${(props) => props.$short && `
-    mask-image: linear-gradient(to right, transparent, white 20px);
-  `}
-`;
-
-const BottomText = styled(Text)`
-  justify-content: flex-start;
-  gap: 4px;
-
-  ${(props) => props.$short && `
-    mask-image: linear-gradient(to left, transparent, white 20px);
-  `}
-`;
+import classes from './SubtitleBlock.module.css';
 
 function SubtitleBlock({ subtitles, currentTime }) {
   const { colorScheme } = useMantineColorScheme();
@@ -89,35 +63,33 @@ function SubtitleBlock({ subtitles, currentTime }) {
     <Stack align="center" justify="center" style={{ gap: '5px' }} pt="20px" pb="10px" px="20px" mih={160}>
       {text ? (
         <>
-          <TopText
+          <Text
             size="lg"
             ta="center"
-            lineClamp={1}
             mih={30}
-            color={closeSegmentColor}
-            $short={isTextLong(text.prev)}
+            c={closeSegmentColor}
+            className={`${classes.topText} ${isTextLong(text.prev) ? classes.leftHidden : ''}`}
           >
             {prepareText(text.prev)}
-          </TopText>
+          </Text>
           <Text
             size="lg"
             ta="center"
             mih={30}
             fw={500}
-            color={currentSegmentColor}
+            c={currentSegmentColor}
           >
             {prepareText(text.current)}
           </Text>
-          <BottomText
+          <Text
             size="lg"
             ta="center"
             mih={30}
-            lineClamp={1}
-            color={closeSegmentColor}
-            $short={isTextLong(text.next)}
+            c={closeSegmentColor}
+            className={`${classes.bottomText} ${isTextLong(text.next) ? classes.rightHidden : ''}`}
           >
             {prepareText(text.next)}
-          </BottomText>
+          </Text>
         </>
       ) : null}
     </Stack>

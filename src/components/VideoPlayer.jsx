@@ -3,7 +3,7 @@ import {
   ActionIcon, Group, Paper, Stack, Text,
 } from '@mantine/core';
 import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react';
-import SubtitleBlock from './SubtitleBlock';
+import SubtitleBlock from './subtitles/SubtitleBlock.jsx';
 import ReactPlayer from "react-player";
 
 function VideoPlayer({
