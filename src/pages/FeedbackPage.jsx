@@ -28,7 +28,7 @@ function FeedbackPage() {
 
   const sendFeedback = (values) => {
     axios
-      .post('http://localhost:8081/api/v1/feedback', values)
+      .post('http://localhost:8080/feedback', values)
       .then(() => {
         successHandlers.open();
         form.reset();

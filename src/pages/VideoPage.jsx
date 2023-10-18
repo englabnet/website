@@ -18,7 +18,7 @@ function VideoPage() {
   const [index, setIndex] = useState(0);
 
   const loadVideos = (from = 0) => axios
-    .get('http://localhost:8080/api/v1/searcher/search', {
+    .get('http://localhost:8080/search', {
       params: {
         ...searchValues,
         from,
