@@ -1,11 +1,11 @@
 import React from 'react';
 import {
   Button, Divider, Grid, Group, Paper,
-  Select, Space, Textarea, TextInput, Title, Text, Modal
+  Select, Space, Textarea, TextInput, Title, Text,
 } from '@mantine/core';
-import { IconCircleCheck, IconExclamationCircle } from '@tabler/icons-react';
 import { useForm } from "@mantine/form";
 import axios from "axios";
+import MessageDialog from "../components/MessageDialog.jsx";
 import { useDisclosure } from "@mantine/hooks";
 
 function FeedbackPage() {
@@ -24,7 +24,8 @@ function FeedbackPage() {
   });
 
   const [successShown, successHandlers] = useDisclosure(false);
-  const [errorShown, errorHandlers] = useDisclosure(false);
+  const [rateLimitError, rateLimitErrorHandlers] = useDisclosure(false);
+  const [unexpectedErrorShown, unexpectedErrorHandlers] = useDisclosure(false);
 
   const sendFeedback = (values) => {
     axios
@@ -32,8 +33,13 @@ function FeedbackPage() {
       .then(() => {
         successHandlers.open();
         form.reset();
-      })
-      .catch(() => errorHandlers.open());
+      }).catch(error => {
+        if (error.response.status === 429) {
+          rateLimitErrorHandlers.open();
+        } else {
+          unexpectedErrorHandlers.open();
+        }
+      });
   }
 
   return (
@@ -94,28 +100,24 @@ function FeedbackPage() {
           <Button type='submit'>Send</Button>
         </Group>
       </form>
-      <Modal opened={successShown} onClose={successHandlers.close} centered>
-        <Group mb={20}>
-          <IconCircleCheck size={50} color="green"/>
-          <Text size="md">
-            Your feedback has been sent! Thank you!
-          </Text>
-        </Group>
-        <Group justify="flex-end">
-          <Button onClick={successHandlers.close}>Close</Button>
-        </Group>
-      </Modal>
-      <Modal opened={errorShown} onClose={errorHandlers.close} centered>
-        <Group mb={20}>
-          <IconExclamationCircle size={50} color="red"/>
-          <Text size="md" maw={300}>
-            An unexpected error has occurred! Please, try again later.
-          </Text>
-        </Group>
-        <Group justify="flex-end">
-          <Button onClick={errorHandlers.close}>Close</Button>
-        </Group>
-      </Modal>
+      <MessageDialog
+        type='success'
+        message='Your feedback has been sent! Thank you!'
+        opened={successShown}
+        onClose={successHandlers.close}
+      />
+      <MessageDialog
+        type='error'
+        message="You've exceeded the rate limit. Please wait a few seconds and try again."
+        opened={rateLimitError}
+        onClose={rateLimitErrorHandlers.close}
+      />
+      <MessageDialog
+        type='error'
+        message='An unexpected error has occurred! Please try again later.'
+        opened={unexpectedErrorShown}
+        onClose={unexpectedErrorHandlers.close}
+      />
     </Paper>
   );
 }
