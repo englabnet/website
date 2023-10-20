@@ -108,7 +108,7 @@ function FeedbackPage() {
       />
       <MessageDialog
         type='error'
-        message="You've exceeded the rate limit. Please wait a few seconds and try again."
+        message="You've exceeded the rate limit. Please wait a few minutes and try again."
         opened={rateLimitError}
         onClose={rateLimitErrorHandlers.close}
       />
