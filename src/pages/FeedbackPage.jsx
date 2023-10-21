@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import {
   Button, Divider, Grid, Group, Paper,
   Select, Space, Textarea, TextInput, Title, Text,
@@ -7,6 +7,7 @@ import { useForm } from "@mantine/form";
 import axios from "axios";
 import MessageDialog from "../components/MessageDialog.jsx";
 import { useDisclosure } from "@mantine/hooks";
+import { GoogleReCaptcha } from "react-google-recaptcha-v3";
 
 function FeedbackPage() {
   const form = useForm({
@@ -23,23 +24,40 @@ function FeedbackPage() {
     },
   });
 
+  const [token, setToken] = useState();
+  const [refreshReCaptcha, setRefreshReCaptcha] = useState(false);
+
+  const onVerify = useCallback((token) => {
+    console.log(token);
+    setToken(token);
+  }, []);
+
   const [successShown, successHandlers] = useDisclosure(false);
-  const [rateLimitError, rateLimitErrorHandlers] = useDisclosure(false);
+  const [rateLimitErrorShown, rateLimitErrorHandlers] = useDisclosure(false);
+  const [recaptchaErrorShown, recaptchaErrorHandlers] = useDisclosure(false);
   const [unexpectedErrorShown, unexpectedErrorHandlers] = useDisclosure(false);
 
   const sendFeedback = (values) => {
+    const config = {
+      headers: {
+        recaptcha: token
+      }
+    };
     axios
-      .post('http://localhost:8080/feedback', values)
+      .post('/api/v1/feedback', values, config)
       .then(() => {
         successHandlers.open();
         form.reset();
       }).catch(error => {
         if (error.response.status === 429) {
           rateLimitErrorHandlers.open();
+        } else if (error.response.status === 422) {
+          recaptchaErrorHandlers.open();
         } else {
           unexpectedErrorHandlers.open();
         }
       });
+    setRefreshReCaptcha(r => !r);
   }
 
   return (
@@ -100,6 +118,7 @@ function FeedbackPage() {
           <Button type='submit'>Send</Button>
         </Group>
       </form>
+      <GoogleReCaptcha onVerify={onVerify} refreshReCaptcha={refreshReCaptcha}/>
       <MessageDialog
         type='success'
         message='Your feedback has been sent! Thank you!'
@@ -109,12 +128,18 @@ function FeedbackPage() {
       <MessageDialog
         type='error'
         message="You've exceeded the rate limit. Please wait a few minutes and try again."
-        opened={rateLimitError}
+        opened={rateLimitErrorShown}
         onClose={rateLimitErrorHandlers.close}
       />
       <MessageDialog
         type='error'
-        message='An unexpected error has occurred! Please try again later.'
+        message='reCaptcha validation failed. Please try again later.'
+        opened={recaptchaErrorShown}
+        onClose={recaptchaErrorHandlers.close}
+      />
+      <MessageDialog
+        type='error'
+        message='An unexpected error has occurred. Please try again later.'
         opened={unexpectedErrorShown}
         onClose={unexpectedErrorHandlers.close}
       />
