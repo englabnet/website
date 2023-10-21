@@ -3,3 +3,7 @@
   src: local("Gabarito-Regular"),
   url("./fonts/gabarito/Gabarito-Regular.ttf") format("truetype");
 }
+
+.grecaptcha-badge {
+  visibility: hidden;
+}

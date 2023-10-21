@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import {
   Button, Divider, Grid, Group, Paper,
-  Select, Space, Textarea, TextInput, Title, Text,
+  Select, Space, Textarea, TextInput, Title, Text, Center,
 } from '@mantine/core';
 import { useForm } from "@mantine/form";
 import axios from "axios";
@@ -113,6 +113,11 @@ function FeedbackPage() {
           minRows={6}
           {...form.getInputProps('message')}
         />
+        <Text size='xs' c="dimmed" m={5}>
+          This site is protected by reCAPTCHA and the Google {"\n"}
+          <a href="https://policies.google.com/privacy">Privacy Policy</a> and {"\n"}
+          <a href="https://policies.google.com/terms">Terms of Service</a> apply.
+        </Text>
         <Space h="md" />
         <Group justify="flex-end">
           <Button type='submit'>Send</Button>
