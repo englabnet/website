@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import {
   Button, Divider, Grid, Group, Paper,
-  Select, Space, Textarea, TextInput, Title, Text, Center,
+  Select, Space, Textarea, TextInput, Title, Text,
 } from '@mantine/core';
 import { useForm } from "@mantine/form";
 import axios from "axios";
