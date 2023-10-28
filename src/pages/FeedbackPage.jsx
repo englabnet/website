@@ -28,7 +28,6 @@ function FeedbackPage() {
   const [refreshReCaptcha, setRefreshReCaptcha] = useState(false);
 
   const onVerify = useCallback((token) => {
-    console.log(token);
     setToken(token);
   }, []);
 

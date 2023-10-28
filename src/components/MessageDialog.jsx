@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Group, Modal, Text } from "@mantine/core";
 import { IconExclamationCircle, IconCircleCheck } from "@tabler/icons-react";
 
-export default function MessageDialog({ type, message, opened, onClose}) {
+export default function MessageDialog({ type, message, opened, onClose }) {
   let icon = null;
   if (type === "error") {
     icon = <IconExclamationCircle size={50} color="red"/>
