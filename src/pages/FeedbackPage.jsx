@@ -95,7 +95,7 @@ function FeedbackPage() {
               defaultValue={'suggest a new video'}
               data={[
                 { label: '🎥  suggest a new video', value: 'VIDEO' },
-                { label: '🐣  suggest a new feature', value: 'FEATURE' },
+                { label: '💡  suggest a new feature', value: 'FEATURE' },
                 { label: '🐞  report a bug', value: 'BUG' },
                 { label: '✍️  write something else', value: 'OTHER' },
               ]}
