@@ -35,8 +35,10 @@ function FeedbackPage() {
   const [rateLimitErrorShown, rateLimitErrorHandlers] = useDisclosure(false);
   const [recaptchaErrorShown, recaptchaErrorHandlers] = useDisclosure(false);
   const [unexpectedErrorShown, unexpectedErrorHandlers] = useDisclosure(false);
+  const [loading, setLoading] = useState(false);
 
   const sendFeedback = (values) => {
+    setLoading(true);
     const config = {
       headers: {
         recaptcha: token
@@ -55,7 +57,7 @@ function FeedbackPage() {
         } else {
           unexpectedErrorHandlers.open();
         }
-      });
+      }).finally(() => setLoading(false));
     setRefreshReCaptcha(r => !r);
   }
 
@@ -119,7 +121,7 @@ function FeedbackPage() {
         </Text>
         <Space h="md" />
         <Group justify="flex-end">
-          <Button type='submit'>Send</Button>
+          <Button type='submit' loading={loading}>Send</Button>
         </Group>
       </form>
       <GoogleReCaptcha onVerify={onVerify} refreshReCaptcha={refreshReCaptcha}/>
