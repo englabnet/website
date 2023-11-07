@@ -80,7 +80,7 @@ function VideoPage() {
 
   return (
     <>
-      <Center pt={10}>
+      <Center pt={15}>
         <SearchBar
           phrase={searchParams.get('phrase')}
           variety={searchParams.get('variety')}
@@ -89,7 +89,7 @@ function VideoPage() {
           }}
         />
       </Center>
-      <Stack pt={10}>
+      <Stack pt={15}>
         {content}
       </Stack>
     </>

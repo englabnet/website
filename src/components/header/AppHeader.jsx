@@ -27,7 +27,7 @@ export default function AppHeader() {
   ));
 
   return (
-    <AppShell.Header p="sm" height="56px">
+    <AppShell.Header p="sm" height="56px" className={classes.header}>
       <Group justify="space-between">
         <Link className={classes.logo} to="/">
           <Text

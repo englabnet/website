@@ -7,7 +7,7 @@ import SearchBar from '../components/SearchBar';
 
 const searchAnimation = keyframes`
   from {height: 90%}
-  to {height: 120px}
+  to {height: 130px}
 `;
 
 const AnimatedCenter = styled(Center)`

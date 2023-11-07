@@ -7,7 +7,7 @@ import classes from './AppFooter.module.css';
 
 export default function AppFooter() {
   return (
-    <AppShell.Footer style={{ position: 'static' }}>
+    <AppShell.Footer className={classes.footer}>
       <Stack align="center" justify="space-around" gap="xs" style={{ margin: 6 }}>
         <Link variant="transparent" className={classes.link} to='/terms'>Privacy & Terms</Link>
         <Text size="xs" c="dimmed">

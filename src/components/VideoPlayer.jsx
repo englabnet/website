@@ -53,12 +53,12 @@ function VideoPlayer({
   }, [url]);
 
   return (
-    <Paper shadow="xs" py="15px" w={800} mx="auto">
+    <Paper py={15} shadow="md" withBorder w={800} mx="auto">
       <Stack align="center">
         <Text size="xs" c="dimmed">{`${index + 1}/${count}`}</Text>
         <Group w="100%" style={{ gap: 0 }}>
           <ActionIcon
-            miw="50px"
+            miw="49px"
             variant="light"
             color="gray"
             mih="393.75px"
@@ -78,7 +78,7 @@ function VideoPlayer({
             height={393.75}
           />
           <ActionIcon
-            miw="50px"
+            miw="49px"
             variant="light"
             color="gray"
             mih="393.75px"

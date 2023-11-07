@@ -14,7 +14,7 @@ const StyledMain = styled(AppShell.Main)`
 
 const resolver = (theme) => ({
   light: {
-    '--mantine-color-background': theme.colors.gray[1],
+    '--mantine-color-background': '#ffffff',
   },
   dark: {
     '--mantine-color-background': theme.colors.dark[8],
@@ -29,6 +29,9 @@ export default function App() {
           fontFamily: 'Roboto, sans-serif',
           headings: {
             fontFamily: 'Gabarito, Roboto, sans-serif'
+          },
+          shadows: {
+            xs: '1px 1px 3px rgba(0, 0, 0, .10)',
           },
           primaryColor: 'blue',
           defaultGradient: { from: 'blue.6', to: 'blue.4' },

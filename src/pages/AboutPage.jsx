@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 function AboutPage() {
   return (
-    <Paper shadow="xs" p="30px" w={1000} mx="auto" mt={10}>
+    <Paper shadow="md" withBorder p="30px" w={1000} mx="auto" mt={15}>
       <Title order={2}>Welcome to englab!</Title>
       <Space h="md" />
       <Text size='md'>

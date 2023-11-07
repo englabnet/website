@@ -30,12 +30,13 @@ function SearchBar({
   };
 
   return (
-    <Box miw={700} mx="auto">
+    <Box miw={600} mx="auto">
       <form onSubmit={form.onSubmit((values) => submitHandler(values))}>
         <Center>
           <Input
             w="100%"
             size="lg"
+            variant="filled"
             placeholder="Search for..."
             radius="xl"
             {...form.getInputProps('phrase')}
@@ -55,10 +56,11 @@ function SearchBar({
             )}
           />
         </Center>
-        <Grid justify="center" align="flex-end">
+        <Grid justify="center" align="flex-end" mt={10}>
           <Grid.Col span="content">
             <SegmentedControl
-              size="sm"
+              size="xs"
+              radius="xl"
               data={[
                 { label: '🌎 All', value: 'ALL' },
                 { label: '🇬🇧 UK', value: 'UK' },

@@ -62,7 +62,7 @@ function FeedbackPage() {
   }
 
   return (
-    <Paper shadow="xs" p="30px" w={500} mx="auto" mt={10}>
+    <Paper shadow="md" withBorder p="30px" w={500} mx="auto" mt={15}>
       <Title order={2}>Leave feedback</Title>
       <Space h="md" />
       <Text size='sm'>

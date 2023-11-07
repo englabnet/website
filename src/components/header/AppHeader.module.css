@@ -14,3 +14,7 @@
 .link:hover {
   background-color: var(--mantine-color-default-hover);
 }
+
+.header {
+  box-shadow: var(--mantine-shadow-xs, none);
+}
