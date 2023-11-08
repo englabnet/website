@@ -1,8 +1,4 @@
-@font-face {
-  font-family: "Gabarito";
-  src: local("Gabarito-Regular"),
-  url("./fonts/gabarito/Gabarito-Regular.ttf") format("truetype");
-}
+@import url('https://fonts.googleapis.com/css2?family=Gabarito&display=swap');
 
 .grecaptcha-badge {
   visibility: hidden;
