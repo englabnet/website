@@ -18,7 +18,7 @@ function AboutPage() {
       <Space h="xs" />
       <Text>
         For now, I&apos;ve implemented only a video search feature that allows you to find specific words or phrases in YouTube videos.
-        It&apos;s quite simple, but useful enough if you want to check pronunciation or find examples of sentences.
+        It&apos;s quite simple, but useful enough if you want to check pronunciation or find sentence examples.
       </Text>
       <Space h="xs" />
       <Text>
