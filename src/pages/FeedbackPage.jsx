@@ -8,6 +8,7 @@ import axios from "axios";
 import MessageDialog from "../components/MessageDialog.jsx";
 import { useDisclosure } from "@mantine/hooks";
 import { GoogleReCaptcha } from "react-google-recaptcha-v3";
+import ResponsivePaper from "../components/ResponsivePaper.jsx";
 
 function FeedbackPage() {
   const form = useForm({
@@ -62,7 +63,7 @@ function FeedbackPage() {
   }
 
   return (
-    <Paper shadow="md" withBorder p="30px" w={500} mx="auto" mt={15}>
+    <ResponsivePaper width={500}>
       <Title order={2}>Leave feedback</Title>
       <Space h="md" />
       <Text size='sm'>
@@ -149,7 +150,7 @@ function FeedbackPage() {
         opened={unexpectedErrorShown}
         onClose={unexpectedErrorHandlers.close}
       />
-    </Paper>
+    </ResponsivePaper>
   );
 }
 

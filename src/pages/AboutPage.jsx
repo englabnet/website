@@ -1,10 +1,11 @@
 import React from 'react';
-import { List, Paper, Space, Text, Title } from '@mantine/core';
+import { List, Space, Text, Title } from '@mantine/core';
 import { Link } from "react-router-dom";
+import ResponsivePaper from "../components/ResponsivePaper.jsx";
 
 function AboutPage() {
   return (
-    <Paper shadow="md" withBorder p="30px" w={1000} mx="auto" mt={15}>
+    <ResponsivePaper width="80%">
       <Title order={2}>Welcome to englab!</Title>
       <Space h="md" />
       <Text size='md'>
@@ -31,10 +32,10 @@ function AboutPage() {
       </List>
       <Space h="xs" />
       <Text>
-        The list above is definitely not complete and will expand in the future,
+        The list above is definitely not complete and will expand in the future
         as I&apos;m very excited about this project and have myriad ideas for further development.
       </Text>
-    </Paper>
+    </ResponsivePaper>
   );
 }
 
