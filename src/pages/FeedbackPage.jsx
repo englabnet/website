@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import {
-  Button, Divider, Grid, Group, Paper,
+  Button, Divider, Grid, Group,
   Select, Space, Textarea, TextInput, Title, Text,
 } from '@mantine/core';
 import { useForm } from "@mantine/form";
@@ -63,7 +63,7 @@ function FeedbackPage() {
   }
 
   return (
-    <ResponsivePaper width={500}>
+    <ResponsivePaper w={450}>
       <Title order={2}>Leave feedback</Title>
       <Space h="md" />
       <Text size='sm'>

@@ -89,7 +89,7 @@ function VideoPage() {
           }}
         />
       </Center>
-      <Stack pt={15}>
+      <Stack>
         {content}
       </Stack>
     </>

@@ -16,7 +16,7 @@ const links = [
 export default function AppHeader() {
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
   const dark = colorScheme === 'dark';
-  const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
+  const isMobile = useMediaQuery(`(max-width: ${em(800)})`);
   const [menuOpened, menuHandlers] = useDisclosure();
 
   const items = links.map((link) => (

@@ -1,21 +1,23 @@
 import React from 'react';
-import { Box, em, Paper } from '@mantine/core';
+import { Box, Center, em, Paper } from '@mantine/core';
 import { useMediaQuery } from "@mantine/hooks";
 
-export default function ResponsivePaper({ width, children }) {
-  const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
+export default function ResponsivePaper({ w, p="20px", children }) {
+  const isMobile = useMediaQuery(`(max-width: ${em(800)})`);
 
   if (isMobile) {
     return (
-      <Box p="20px" mx="auto">
+      <Box p={p}>
         {children}
       </Box>
     );
   }
 
   return (
-    <Paper shadow="md" withBorder p="30px" w={width} mx="auto" mt={15}>
-      {children}
-    </Paper>
+    <Center m={15}>
+      <Paper shadow="md" withBorder w={w} p={p}>
+        {children}
+      </Paper>
+    </Center>
   );
 }

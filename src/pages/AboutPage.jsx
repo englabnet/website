@@ -5,7 +5,7 @@ import ResponsivePaper from "../components/ResponsivePaper.jsx";
 
 function AboutPage() {
   return (
-    <ResponsivePaper width="80%">
+    <ResponsivePaper w="80%">
       <Title order={2}>Welcome to englab!</Title>
       <Space h="md" />
       <Text size='md'>
