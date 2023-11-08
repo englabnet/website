@@ -6,7 +6,7 @@ import { keyframes } from '@emotion/react';
 import SearchBar from '../components/SearchBar';
 
 const searchAnimation = keyframes`
-  from {height: 90%}
+  from {height: 85%}
   to {height: 130px}
 `;
 
@@ -38,7 +38,7 @@ function MainPage() {
           {searchBar}
         </AnimatedCenter>
       ) : (
-        <Center style={{ height: '90%' }}>
+        <Center style={{ height: '85%' }}>
           {searchBar}
         </Center>
       )}

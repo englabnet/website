@@ -30,11 +30,11 @@ function SearchBar({
   };
 
   return (
-    <Box miw={600} mx="auto">
+    <Box w={600} mx="auto">
       <form onSubmit={form.onSubmit((values) => submitHandler(values))}>
         <Center>
           <Input
-            w="100%"
+            w="95%"
             size="lg"
             variant="filled"
             placeholder="Search for..."
