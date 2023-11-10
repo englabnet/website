@@ -9,7 +9,14 @@ export default function AppFooter() {
   return (
     <AppShell.Footer className={classes.footer}>
       <Stack align="center" justify="space-around" gap="xs" style={{ margin: 6 }}>
-        <Link variant="transparent" className={classes.link} to='/terms'>Privacy & Terms</Link>
+        <Link
+          variant="transparent"
+          className={classes.link}
+          to='/terms'
+          onClick={() => window.scrollTo(0, 0)}
+        >
+          Privacy & Terms
+        </Link>
         <Text size="xs" c="dimmed">
           Copyright ©
           {' '}
