@@ -235,7 +235,7 @@ function TermPage() {
       <Title order={3}>Contact Us</Title>
       <Space h="xs" />
       <Text>
-        If you have any questions, please contact us directly at: <Link to="mailto: contact@englab.net">contact@englab.net</Link>
+        If you have any questions, please contact us directly at <Link to="mailto: contact@englab.net">contact@englab.net</Link>
       </Text>
     </ResponsivePaper>
   );

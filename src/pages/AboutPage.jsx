@@ -11,7 +11,6 @@ function AboutPage() {
       <Text size='md'>
         This small website aims to help English learners all over the world master the language.
         While it currently lacks extensive functionality, I plan to add a lot of new features and helpful exercises in the future.
-        If you have any suggestions on how to improve this platform, don&apos;t hesitate to <Link to="/feedback">leave feedback</Link>.
       </Text>
       <Space h="lg" />
       <Title order={3}>Functionality</Title>
@@ -34,6 +33,13 @@ function AboutPage() {
       <Text>
         The list above is definitely not complete and will expand in the future
         as I&apos;m very excited about this project and have myriad ideas for further development.
+      </Text>
+      <Space h="lg" />
+      <Title order={3}>Contact us</Title>
+      <Space h="xs" />
+      <Text>
+        If you have any suggestions on how to improve this platform, don&apos;t hesitate
+        to <Link to="/feedback">leave feedback</Link> or contact us directly at <Link to="mailto: contact@englab.net">contact@englab.net</Link>.
       </Text>
     </ResponsivePaper>
   );
