@@ -9,7 +9,7 @@ function TermPage() {
       <Title order={2}>Privacy Policy</Title>
       <Space h="md" />
       <Text>
-        Welcome to englab. Your privacy is important to us.
+        Welcome to Englab. Your privacy is important to us.
         This Privacy Policy provides information about the personal data we collect from you, how we use it,
         and how it is protected when you use our website.
         By using our site, you consent to our data practices.
@@ -135,7 +135,107 @@ function TermPage() {
       <Title order={2}>Terms of Service</Title>
       <Space h="md" />
       <Text>
-        Info
+        Englab is an online platform that provides users with tools to improve their English skills.
+        These Services may change from time to time without prior notice to you and we may stop (permanently or temporarily)
+        providing the Services (or any features within the Services) to you or to users generally and may not be able to provide you with prior notice.
+      </Text>
+      <Space h="lg" />
+      <Title order={3}>General Use</Title>
+      <Space h="xs" />
+      <Text>
+        The Services may include advertisements, which may be targeted to the Content or information on the Services,
+        queries made through the Services, or other information. The types and extent of advertising on the Services are
+        subject to change. In consideration for Englab granting you access to and use of the Services,
+        you agree that Englab and its third party providers and partners may place such advertising on the Services
+        or in connection with the display of Content or information from the Services whether submitted by you or others.
+      </Text>
+      <Space h="lg" />
+      <Title order={3}>General Restrictions</Title>
+      <Space h="xs" />
+      <Text>
+        You are prohibited from acquiring, storing, showing, or aiding in the distribution of any content from Englab
+        that is acquired by scraping, crawling, spidering, or any other means or software that bypasses the official APIs
+        (referred to collectively as &quot;Non-Official Content&quot;). This prohibition is in effect regardless of whether (1)
+        the Non-Official Content was sourced directly or through an intermediary, like a customer or external developer,
+        and (2) whether the Non-Official Content is retained or exhibited within the Application or any other platform,
+        product, or service.
+      </Text>
+      <Space h="lg" />
+      <Title order={3}>Youtube</Title>
+      <Space h="xs" />
+      <Text>
+        Englab uses YouTube API Services to gather content and to play videos.
+        As such, users are agreeing to be bound by the <Link target="_blank" to={'https://www.youtube.com/t/terms'}>YouTube Terms of Service</Link>.
+      </Text>
+      {/*<Space h="lg" />*/}
+      {/*<Title order={3}>Englab Account</Title>*/}
+      {/*<Space h="xs" />*/}
+      {/*<Text>*/}
+      {/*  TBD*/}
+      {/*</Text>*/}
+      <Space h="lg" />
+      <Title order={3}>Content Owner</Title>
+      <Space h="xs" />
+      <Text>
+        Content owners that wish to delete their content from Englab can do so by submitting a request via email.
+      </Text>
+      {/*<Space h="lg" />*/}
+      {/*<Title order={3}>Registration</Title>*/}
+      {/*<Space h="xs" />*/}
+      {/*<Text>*/}
+      {/*  TBD*/}
+      {/*</Text>*/}
+      <Space h="lg" />
+      <Title order={3}>Disclaimer</Title>
+      <Space h="xs" />
+      <Text>
+        ENGLAB.NET endeavors to offer precise information on its website, but does not guarantee the accuracy of such information.
+        ENGLAB.NET reserves the right to modify its services at any time without prior notice. Periodic updates to the website may be made by ENGLAB.NET.
+        The Terms of Service (TOS) provided here represent the complete agreement regarding the usage of the ENGLAB.NET website.
+        ENGLAB.NET may update these TOS at any time without providing notice. All rights not explicitly granted in these TOS are reserved by ENGLAB.NET.
+      </Text>
+      <Space h="xs" />
+      <Text>
+        ALL INFORMATION ON THIS SITE IS PROVIDED &quot;AS IS&quot; WITH ALL FAULTS WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED.
+        ENGLAB.NET DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION, THOSE OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT
+      </Text>
+      <Space h="lg" />
+      <Title order={3}>Copyright</Title>
+      <Space h="xs" />
+      <Text>
+        All content and materials available on the ENGLAB.NET website, including but not limited to texts, images, logos,
+        graphics, software, documents, and services (collectively referred to as &quot;Materials&quot;),
+        are the copyrighted property of ENGLAB.NET and any third-party content providers.
+        Unauthorized copying, reproduction, distribution, republication, downloading, display, posting,
+        or transmission of any Materials from ENGLAB.NET in any form or by any means is strictly prohibited without prior
+        express written consent from ENGLAB.NET.
+      </Text>
+      <Space h="xs" />
+      <Text>
+        Commercial exploitation of ENGLAB.NET Materials without the express written permission of ENGLAB.NET is also not allowed.
+        No part of the ENGLAB.NET website grants any license or right under ENGLAB.NET&apos;s intellectual property, except as explicitly specified.
+      </Text>
+      <Space h="xs" />
+      <Text>
+        Users are responsible for acquiring the necessary permissions for any utilization of ENGLAB.NET Materials.
+        ENGLAB.NET allows the use of its Materials for personal, non-commercial purposes under certain conditions,
+        such as the inclusion of copyright and permission notices in the used Materials, ensuring that the Materials
+        are used strictly for personal, non-commercial aims, and that the Materials are not altered in any form.
+      </Text>
+      <Space h="xs" />
+      <Text>
+        The permission to use ENGLAB.NET Materials is subject to immediate revocation without notice if the
+        Terms of Service (TOS) are violated. Upon revocation, any downloaded or printed Materials must be promptly destroyed.
+      </Text>
+      <Space h="xs" />
+      <Text>
+        Unauthorized usage of Materials from ENGLAB.NET may breach copyright, trademark, and privacy laws.
+      </Text>
+      <Space h="lg" />
+      <Title order={3}>Contact Us</Title>
+      <Space h="xs" />
+      <Text>
+        If you have any questions, please contact us directly at: <Link to="mailto: contact@englab.net">contact@englab.net</Link>
       </Text>
     </ResponsivePaper>
   );
