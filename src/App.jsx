@@ -26,9 +26,9 @@ export default function App() {
     <BrowserRouter>
       <MantineProvider
         theme={{
-          fontFamily: 'Roboto, sans-serif',
+          fontFamily: 'Roboto, sans-serif, Noto Color Emoji',
           headings: {
-            fontFamily: 'Gabarito, Roboto, sans-serif'
+            fontFamily: 'Gabarito, Roboto, sans-serif, Noto Color Emoji'
           },
           shadows: {
             xs: '1px 1px 3px rgba(0, 0, 0, .10)',
