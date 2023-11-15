@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import {
   Mark, Stack, Text, useMantineColorScheme,
 } from '@mantine/core';
-import classes from './SubtitleBlock.module.css';
+import FadingText from "./FadingText.jsx";
 
 function SubtitleBlock({ subtitles, currentTime }) {
   const { colorScheme } = useMantineColorScheme();
@@ -52,26 +52,18 @@ function SubtitleBlock({ subtitles, currentTime }) {
     });
   };
 
-  const isTextLong = (text) => text && text.join().length > 80;
-
   const text = binarySearchByTime(currentTime, subtitles);
 
   const currentSegmentColor = colorScheme === 'dark' ? 'blue.3' : 'blue.6';
   const closeSegmentColor = colorScheme === 'dark' ? 'blue.8' : 'blue.3';
 
   return (
-    <Stack align="center" justify="center" style={{ gap: '5px', overflow: 'hidden' }} pt="20px" pb="10px" px="20px" mih={160}>
+    <Stack align="center" gap="5px" justify="flex-start" mb="10px" mt="5px" mx="20px" mih={130}>
       {text ? (
         <>
-          <Text
-            size="lg"
-            ta="center"
-            mih={30}
-            c={closeSegmentColor}
-            className={`${classes.topText} ${isTextLong(text.prev) ? classes.leftHidden : ''}`}
-          >
+          <FadingText c={closeSegmentColor}>
             {prepareText(text.prev)}
-          </Text>
+          </FadingText>
           <Text
             size="lg"
             ta="center"
@@ -81,15 +73,9 @@ function SubtitleBlock({ subtitles, currentTime }) {
           >
             {prepareText(text.current)}
           </Text>
-          <Text
-            size="lg"
-            ta="center"
-            mih={30}
-            c={closeSegmentColor}
-            className={`${classes.bottomText} ${isTextLong(text.next) ? classes.rightHidden : ''}`}
-          >
+          <FadingText truncateEnd c={closeSegmentColor}>
             {prepareText(text.next)}
-          </Text>
+          </FadingText>
         </>
       ) : null}
     </Stack>

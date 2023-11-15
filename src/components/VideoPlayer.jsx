@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import {
-  ActionIcon, AspectRatio, Group, Stack, Text,
+  ActionIcon, AspectRatio, Button, Group, Stack, Switch, Text,
 } from '@mantine/core';
 import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react';
 import SubtitleBlock from './subtitles/SubtitleBlock.jsx';
 import ReactPlayer from "react-player";
 import ResponsivePaper from "./ResponsivePaper.jsx";
+import classes from './VideoPlayer.module.css';
 
 function VideoPlayer({
   index, count, video,
@@ -14,6 +15,8 @@ function VideoPlayer({
 }) {
   const player = useRef(null);
   const [url, setUrl] = useState("https://www.youtube.com/watch?v=" + video.videoId);
+  const [autoplay, setAutoplay] = useState(true);
+  const [light, setLight] = useState(false);
 
   // just a small adjustment to make sure that the phrase will appear in the video
   const startTime = Math.floor(video.subtitles[video.index].startTime);
@@ -38,6 +41,12 @@ function VideoPlayer({
 
     videoIdRef.current = video.videoId;
     startTimeRef.current = startTime;
+    setCurrentTime(startTime);
+
+    setLight(!autoplay);
+    if (!autoplay && light) {
+      player.current.showPreview();
+    }
   }, [startTime, video])
 
   useEffect(() => {
@@ -55,14 +64,14 @@ function VideoPlayer({
 
   return (
     <ResponsivePaper w={800} p={0}>
-      <Stack align="center">
-        <Text size="xs" pt={15} c="dimmed">{`${index + 1}/${count}`}</Text>
+      <Stack align="center" gap={0}>
+        <Text size="xs" p={15} c="dimmed">{`${index + 1}/${count}`}</Text>
         <AspectRatio ratio={16 / 8} w='100%'>
           <Group w="100%" justify="center" grow gap={0} wrap="nowrap">
             <ActionIcon
-              maw="auto"
               variant="light"
               color="gray"
+              maw="7%"
               h="100%"
               radius={0}
               onClick={onPrevious}
@@ -75,14 +84,15 @@ function VideoPlayer({
               url={url}
               onReady={onReady}
               playing
+              light={light}
               controls
               width="86%"
               height="100%"
             />
             <ActionIcon
-              maw="auto"
               variant="light"
               color="gray"
+              maw="7%"
               h="100%"
               radius={0}
               onClick={onNext}
@@ -92,6 +102,17 @@ function VideoPlayer({
             </ActionIcon>
           </Group>
         </AspectRatio>
+        <Group w="86%" py={5} justify="flex-end" gap="xs">
+          <Switch classNames={{ label: classes.switchLabel }} checked={autoplay} label="Autoplay"
+                  onChange={event => setAutoplay(event.currentTarget.checked)}/>
+          <Button variant="default" onClick={() => {
+            player.current.seekTo(startTime, 'seconds');
+            const internalPlayer = player.current.getInternalPlayer();
+            if (internalPlayer) {
+              internalPlayer.playVideo();
+            }
+          }}>Replay</Button>
+        </Group>
       </Stack>
       <SubtitleBlock subtitles={video.subtitles} currentTime={currentTime} />
     </ResponsivePaper>
