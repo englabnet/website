@@ -8,6 +8,16 @@ import ReactPlayer from "react-player";
 import ResponsivePaper from "./ResponsivePaper.jsx";
 import classes from './VideoPlayer.module.css';
 
+const autoplaySetting = 'autoplay-setting';
+
+function getAutoplaySettingOrDefault(defaultValue) {
+  const autoplay = localStorage.getItem(autoplaySetting);
+  if (autoplay == null) {
+    return defaultValue;
+  }
+  return autoplay === 'true';
+}
+
 function VideoPlayer({
   index, count, video,
   disablePrevious = true, disableNext = false,
@@ -15,7 +25,7 @@ function VideoPlayer({
 }) {
   const player = useRef(null);
   const [url, setUrl] = useState("https://www.youtube.com/watch?v=" + video.videoId);
-  const [autoplay, setAutoplay] = useState(true);
+  const [autoplay, setAutoplay] = useState(getAutoplaySettingOrDefault(true));
   const [light, setLight] = useState(false);
 
   // just a small adjustment to make sure that the phrase will appear in the video
@@ -103,8 +113,16 @@ function VideoPlayer({
           </Group>
         </AspectRatio>
         <Group w="86%" py={5} justify="flex-end" gap="xs">
-          <Switch classNames={{ label: classes.switchLabel }} checked={autoplay} label="Autoplay"
-                  onChange={event => setAutoplay(event.currentTarget.checked)}/>
+          <Switch
+            classNames={{ label: classes.switchLabel }}
+            checked={autoplay}
+            label="Autoplay"
+            onChange={event => {
+              const checked = event.currentTarget.checked;
+              setAutoplay(checked);
+              localStorage.setItem(autoplaySetting, checked);
+            }}
+          />
           <Button variant="default" onClick={() => {
             player.current.seekTo(startTime, 'seconds');
             const internalPlayer = player.current.getInternalPlayer();

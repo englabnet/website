@@ -28,7 +28,7 @@ function MainPage() {
   };
 
   const searchBar = (
-    <SearchBar delay={500} onSearch={(values) => searchHandler(values)} {...searchValues} />
+    <SearchBar submitDelay={500} onSearch={(values) => searchHandler(values)} {...searchValues} />
   );
 
   return (

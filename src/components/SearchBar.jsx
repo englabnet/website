@@ -6,27 +6,35 @@ import { IconSearch } from '@tabler/icons-react';
 import { useForm } from '@mantine/form';
 import { createSearchParams, useNavigate } from 'react-router-dom';
 
-function SearchBar({
-  phrase, variety = 'ALL', onSearch = () => {}, delay = 0,
-}) {
+const varietySetting = 'variety-setting';
+
+function getVarietySettingOrDefault(defaultValue) {
+  const variety = localStorage.getItem(varietySetting);
+  if (variety == null) {
+    return defaultValue;
+  }
+  return variety;
+}
+
+function SearchBar({ phrase, variety = 'ALL', onSearch: onSubmit = () => {}, submitDelay = 0 }) {
   const navigate = useNavigate();
 
   const form = useForm({
     initialValues: {
       phrase: phrase || '',
-      variety: variety || '',
+      variety: getVarietySettingOrDefault(variety),
     },
   });
 
   const submitHandler = (values) => {
     if (!values.phrase) return;
-    onSearch(values);
+    onSubmit(values);
     setTimeout(() => {
       navigate({
         pathname: '/videos',
         search: createSearchParams(values).toString(),
       });
-    }, delay);
+    }, submitDelay);
   };
 
   return (
@@ -68,6 +76,10 @@ function SearchBar({
                 // { label: '🇦🇺 AUS', value: 'AUS' },
               ]}
               {...form.getInputProps('variety')}
+              onChange={(value) => {
+                localStorage.setItem(varietySetting, value);
+                return form.getInputProps('variety').onChange(value);
+              }}
             />
           </Grid.Col>
         </Grid>
