@@ -7,6 +7,7 @@ import SubtitleBlock from './subtitles/SubtitleBlock.jsx';
 import ReactPlayer from "react-player";
 import ResponsivePaper from "./ResponsivePaper.jsx";
 import classes from './VideoPlayer.module.css';
+import { formatNumber } from "../utils/NumberFormatter.js";
 
 const autoplaySetting = 'autoplay-setting';
 
@@ -75,7 +76,7 @@ function VideoPlayer({
   return (
     <ResponsivePaper w={800} p={0}>
       <Stack align="center" gap={0}>
-        <Text size="xs" p={15} c="dimmed">{`${index + 1}/${count}`}</Text>
+        <Text size="xs" p={15} c="dimmed">{`${index + 1} / ${formatNumber(count)}`}</Text>
         <AspectRatio ratio={16 / 8} w='100%'>
           <Group w="100%" justify="center" grow gap={0} wrap="nowrap">
             <ActionIcon
