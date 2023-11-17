@@ -43,7 +43,7 @@ function MainPage() {
 
   const welcomeMessage = (
     <Center>
-      <Paper withBorder radius="md" p="10px" mx="15px" mt="5vh" w="550px" style={{ backgroundColor: 'var(--mantine-color-background)' }}>
+      <Paper withBorder radius="md" p="10px" m="15px" w="550px" style={{ backgroundColor: 'var(--mantine-color-background)' }}>
         <Group justify="space-between">
           <Space w="22px" />
           <Text c="dimmed" size="md">Welcome!</Text>
