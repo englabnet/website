@@ -161,7 +161,7 @@ function TermPage() {
         product, or service.
       </Text>
       <Space h="lg" />
-      <Title order={3}>Youtube</Title>
+      <Title order={3}>YouTube</Title>
       <Space h="xs" />
       <Text>
         Englab uses YouTube API Services to gather content and to play videos.
