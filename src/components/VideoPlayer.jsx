@@ -34,7 +34,7 @@ function VideoPlayer({
   const [currentTime, setCurrentTime] = useState(startTime);
 
   const videoIdRef = useRef(video.videoId);
-  const startTimeRef = useRef(startTime);
+  const indexRef = useRef(index);
 
   const onReady = () => {
     player.current.seekTo(startTime, 'seconds');
@@ -42,16 +42,18 @@ function VideoPlayer({
 
   useEffect(() => {
     const hasVideoIdChanged = videoIdRef.current !== video.videoId;
-    const hasStartTimeChanged = startTimeRef.current !== startTime;
+    const hasIndexChanged = indexRef.current !== index;
 
+    // if the video id hasn't changed, we just need to play a different part of the video
     if (hasVideoIdChanged) {
       setUrl("https://www.youtube.com/watch?v=" + video.videoId);
-    } else if (hasStartTimeChanged) {
+    } else if (hasIndexChanged) {
       player.current.seekTo(startTime, 'seconds');
     }
 
     videoIdRef.current = video.videoId;
-    startTimeRef.current = startTime;
+    indexRef.current = index;
+
     setCurrentTime(startTime);
 
     setLight(!autoplay);
