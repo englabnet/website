@@ -7,7 +7,7 @@ import { useForm } from "@mantine/form";
 import axios from "axios";
 import MessageDialog from "../components/MessageDialog.jsx";
 import { useDisclosure } from "@mantine/hooks";
-import { GoogleReCaptcha } from "react-google-recaptcha-v3";
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import ResponsivePaper from "../components/ResponsivePaper.jsx";
 
 function FeedbackPage() {
@@ -25,12 +25,11 @@ function FeedbackPage() {
     },
   });
 
-  const [token, setToken] = useState();
-  const [refreshReCaptcha, setRefreshReCaptcha] = useState(false);
+  const { executeRecaptcha } = useGoogleReCaptcha();
 
-  const onVerify = useCallback((token) => {
-    setToken(token);
-  }, []);
+  const handleReCaptchaVerify = useCallback(async () => {
+    return await executeRecaptcha('yourAction');
+  }, [executeRecaptcha]);
 
   const [successShown, successHandlers] = useDisclosure(false);
   const [rateLimitErrorShown, rateLimitErrorHandlers] = useDisclosure(false);
@@ -38,11 +37,10 @@ function FeedbackPage() {
   const [unexpectedErrorShown, unexpectedErrorHandlers] = useDisclosure(false);
   const [loading, setLoading] = useState(false);
 
-  const sendFeedback = (values) => {
-    setLoading(true);
+  const sendFeedback = (values, recaptchaToken) => {
     const config = {
       headers: {
-        recaptcha: token
+        recaptcha: recaptchaToken
       }
     };
     axios
@@ -51,16 +49,22 @@ function FeedbackPage() {
         successHandlers.open();
         form.reset();
       }).catch(error => {
-        if (error.response.status === 429) {
-          rateLimitErrorHandlers.open();
-        } else if (error.response.status === 422) {
-          recaptchaErrorHandlers.open();
-        } else {
-          unexpectedErrorHandlers.open();
-        }
-      }).finally(() => setLoading(false));
-    setRefreshReCaptcha(r => !r);
-  }
+      if (error.response.status === 429) {
+        rateLimitErrorHandlers.open();
+      } else if (error.response.status === 422) {
+        recaptchaErrorHandlers.open();
+      } else {
+        unexpectedErrorHandlers.open();
+      }
+    }).finally(() => setLoading(false));
+  };
+
+  const handleSubmit = (values) => {
+    setLoading(true);
+    handleReCaptchaVerify().then(token => {
+      sendFeedback(values, token)
+    })
+  };
 
   return (
     <ResponsivePaper w={450}>
@@ -73,7 +77,7 @@ function FeedbackPage() {
       <Space h="md" />
       <Divider />
       <Space h="lg" />
-      <form onSubmit={form.onSubmit(values => sendFeedback(values))}>
+      <form onSubmit={form.onSubmit(values => handleSubmit(values))}>
         <Grid>
           <Grid.Col span={12}>
             <TextInput
@@ -125,7 +129,6 @@ function FeedbackPage() {
           <Button type='submit' loading={loading}>Send</Button>
         </Group>
       </form>
-      <GoogleReCaptcha onVerify={onVerify} refreshReCaptcha={refreshReCaptcha}/>
       <MessageDialog
         type='success'
         message='Your feedback has been sent! Thank you!'
