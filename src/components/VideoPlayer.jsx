@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import {
-  ActionIcon, AspectRatio, Button, Group, Stack, Switch, Text,
+  AspectRatio, Button, Group, Stack, Switch, Text, Tooltip,
 } from '@mantine/core';
 import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react';
 import SubtitleBlock from './subtitles/SubtitleBlock.jsx';
@@ -79,19 +79,8 @@ function VideoPlayer({
     <ResponsivePaper w={800} p={0}>
       <Stack align="center" gap={0}>
         <Text size="xs" p={15} c="dimmed">{`${index + 1} / ${numberFormatter.format(count)}`}</Text>
-        <AspectRatio ratio={16 / 8} w='100%'>
+        <AspectRatio ratio={16 / 9} w='100%'>
           <Group w="100%" justify="center" grow gap={0} wrap="nowrap">
-            <ActionIcon
-              variant="light"
-              color="gray"
-              maw="7%"
-              h="100%"
-              radius={0}
-              onClick={onPrevious}
-              disabled={disablePrevious}
-            >
-              <IconChevronLeft style={{ width: '60%', height: '60%' }} />
-            </ActionIcon>
             <ReactPlayer
               ref={player}
               url={url}
@@ -102,37 +91,38 @@ function VideoPlayer({
               width="86%"
               height="100%"
             />
-            <ActionIcon
-              variant="light"
-              color="gray"
-              maw="7%"
-              h="100%"
-              radius={0}
-              onClick={onNext}
-              disabled={disableNext}
-            >
-              <IconChevronRight style={{ width: '60%', height: '60%' }} />
-            </ActionIcon>
           </Group>
         </AspectRatio>
-        <Group w="86%" py={5} justify="flex-end" gap="xs">
-          <Switch
-            classNames={{ label: classes.switchLabel }}
-            checked={autoplay}
-            label="Autoplay"
-            onChange={event => {
-              const checked = event.currentTarget.checked;
-              setAutoplay(checked);
-              localStorage.setItem(autoplaySetting, checked.toString());
-            }}
-          />
-          <Button variant="default" onClick={() => {
-            player.current.seekTo(startTime, 'seconds');
-            const internalPlayer = player.current.getInternalPlayer();
-            if (internalPlayer) {
-              internalPlayer.playVideo();
-            }
-          }}>Replay</Button>
+        <Group w="100%" miw={350} p={5} justify="space-between" gap="xs">
+          <Tooltip position="bottom" withArrow openDelay={500} label="Previous video">
+            <Button onClick={onPrevious} disabled={disablePrevious} variant="default">
+              <IconChevronLeft />
+            </Button>
+          </Tooltip>
+          <Group justify="flex-end" gap="xs">
+            <Switch
+              classNames={{ label: classes.switchLabel }}
+              checked={autoplay}
+              label="Autoplay"
+              onChange={event => {
+                const checked = event.currentTarget.checked;
+                setAutoplay(checked);
+                localStorage.setItem(autoplaySetting, checked.toString());
+              }}
+            />
+            <Button variant="default" onClick={() => {
+              player.current.seekTo(startTime, 'seconds');
+              const internalPlayer = player.current.getInternalPlayer();
+              if (internalPlayer) {
+                internalPlayer.playVideo();
+              }
+            }}>Replay</Button>
+            <Tooltip position="bottom" withArrow openDelay={500} label="Next video">
+              <Button onClick={onNext} disabled={disableNext} variant="default">
+                <IconChevronRight />
+              </Button>
+            </Tooltip>
+          </Group>
         </Group>
       </Stack>
       <SubtitleBlock subtitles={video.subtitles} currentTime={currentTime} />
