@@ -35,9 +35,11 @@ function VideoPage() {
     });
 
   useEffect(() => {
-    setPage(0);
-    setIndex(0);
-    loadVideos(0);
+    loadVideos(0)
+      .then(() => {
+        setPage(0);
+        setIndex(0);
+      });
   }, [searchValues]);
 
   let content = <Center h={500}><Loader color="gray" size="xl" /></Center>;
