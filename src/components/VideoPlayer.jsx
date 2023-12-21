@@ -25,7 +25,7 @@ function VideoPlayer({
   onPrevious = () => {}, onNext = () => {},
 }) {
   const player = useRef(null);
-  const [url, setUrl] = useState("https://www.youtube.com/watch?v=" + video.videoId);
+  const [url, setUrl] = useState("https://www.youtube-nocookie.com/watch?v=" + video.videoId);
   const [autoplay, setAutoplay] = useState(getAutoplaySettingOrDefault(true));
   const [light, setLight] = useState(false);
 
@@ -88,8 +88,17 @@ function VideoPlayer({
               playing
               light={light}
               controls
-              width="86%"
+              width="100%"
               height="100%"
+              config={{
+                youtube: {
+                  playerVars: {
+                    color: 'white',
+                    fs: 0,
+                    start: 10
+                  }
+                }
+              }}
             />
           </Group>
         </AspectRatio>
