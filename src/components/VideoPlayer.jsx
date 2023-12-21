@@ -8,6 +8,8 @@ import ReactPlayer from "react-player";
 import ResponsivePaper from "./ResponsivePaper.jsx";
 import classes from './VideoPlayer.module.css';
 
+const youtubeUrl = "https://www.youtube-nocookie.com/watch?v=";
+
 const autoplaySetting = 'autoplay-setting';
 const numberFormatter = Intl.NumberFormat('en', { notation: "compact" });
 
@@ -25,7 +27,7 @@ function VideoPlayer({
   onPrevious = () => {}, onNext = () => {},
 }) {
   const player = useRef(null);
-  const [url, setUrl] = useState("https://www.youtube-nocookie.com/watch?v=" + video.videoId);
+  const [url, setUrl] = useState(youtubeUrl + video.videoId);
   const [autoplay, setAutoplay] = useState(getAutoplaySettingOrDefault(true));
   const [light, setLight] = useState(false);
 
@@ -46,7 +48,7 @@ function VideoPlayer({
 
     // if the video id hasn't changed, we just need to play a different part of the video
     if (hasVideoIdChanged) {
-      setUrl("https://www.youtube.com/watch?v=" + video.videoId);
+      setUrl(youtubeUrl + video.videoId);
     } else if (hasIndexChanged) {
       player.current.seekTo(startTime, 'seconds');
     }
