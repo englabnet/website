@@ -54,7 +54,6 @@ function MainPage() {
         </Group>
         <Center p="10px">
           <Text c="dimmed" size="md">
-            This website was designed to help you improve your English skills.
             Here, you can search for specific English words or phrases in YouTube videos.
             This tool is perfect for improving pronunciation and exploring language nuances.
             I hope you find it useful!

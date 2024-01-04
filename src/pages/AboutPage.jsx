@@ -26,8 +26,7 @@ function AboutPage() {
       <List>
         <List.Item>More accents</List.Item>
         <List.Item>Advanced search</List.Item>
-        <List.Item>Dictation exercises</List.Item>
-        <List.Item>Spelling trainer</List.Item>
+        <List.Item>Listening exercises</List.Item>
       </List>
       <Space h="xs" />
       <Text>
