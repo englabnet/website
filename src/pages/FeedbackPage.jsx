@@ -9,6 +9,7 @@ import MessageDialog from "../components/MessageDialog.jsx";
 import { useDisclosure } from "@mantine/hooks";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import ResponsivePaper from "../components/ResponsivePaper.jsx";
+import RecaptchaTerms from "../components/recaptcha/RecaptchaTerms.jsx";
 
 function FeedbackPage() {
   const form = useForm({
@@ -119,11 +120,8 @@ function FeedbackPage() {
           minRows={6}
           {...form.getInputProps('message')}
         />
-        <Text size='xs' c="dimmed" m={5}>
-          This site is protected by reCAPTCHA and the Google {"\n"}
-          <a href="https://policies.google.com/privacy">Privacy Policy</a> and {"\n"}
-          <a href="https://policies.google.com/terms">Terms of Service</a> apply.
-        </Text>
+        <Space h="md" />
+        <RecaptchaTerms />
         <Space h="md" />
         <Group justify="flex-end">
           <Button type='submit' loading={loading}>Send</Button>
