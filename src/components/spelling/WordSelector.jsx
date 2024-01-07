@@ -1,15 +1,22 @@
 import { Autocomplete, Button, Group } from '@mantine/core';
 import axios from "axios";
 import { useRef, useState } from "react";
-import { getHotkeyHandler } from "@mantine/hooks";
+import { useForm } from "@mantine/form";
 
-function WordSelector({ onSubmit = () => {} }) {
+function WordSelector({ onSubmit = () => {}, disabled = false }) {
+  const form = useForm({
+    initialValues: {
+      value: '',
+    }
+  });
+
   const [data, setData] = useState([]);
   const timestamp = useRef(new Date());
-  const [currentValue, setCurrentValue] = useState('');
+  const [error, setError] = useState(null);
 
   const handleChange = (value) => {
-    setCurrentValue(value);
+    setError(null);
+    form.reset();
 
     const currentDate = new Date();
     timestamp.current = currentDate;
@@ -29,24 +36,47 @@ function WordSelector({ onSubmit = () => {} }) {
             prefix: value
           }
         }).then((r) => {
-          setData(r.data.map(word => word.text));
+          if (timestamp.current === currentDate) {
+            setData(r.data.map(word => word.text));
+          }
         })
     }, 500);
 
   };
 
+  const handleSubmit = (values) => {
+    axios
+      .get('/api/v1/words', {
+        params: {
+          word: values.value
+        }
+      }).then((r) => {
+        onSubmit(r.data);
+        form.reset();
+        timestamp.current = new Date();
+        setData([]);
+      }).catch((error) => {
+        setError(error.response.data.message);
+      });
+  };
+
   return (
-    <Group grow preventGrowOverflow={false} gap="xs">
-      <Autocomplete
-        placeholder="Enter your word"
-        data={data}
-        onChange={handleChange}
-        onKeyDown={getHotkeyHandler([
-          ['Enter', () => onSubmit(currentValue)]
-        ])}
-      />
-      <Button maw={80} onClick={() => onSubmit(currentValue)}>Add</Button>
-    </Group>
+    <form onSubmit={ form.onSubmit(values => handleSubmit(values)) }>
+      <Group grow preventGrowOverflow={false} align="flex-start" gap="xs">
+        <Autocomplete
+          placeholder="Enter your word"
+          data={data}
+          {...form.getInputProps('value')}
+          onChange={(value) => {
+            handleChange(value);
+            return form.getInputProps('value').onChange(value);
+          }}
+          error={error}
+          disabled={disabled}
+        />
+        <Button maw={80} type='submit' disabled={disabled}>Add</Button>
+      </Group>
+    </form>
   );
 }
 
