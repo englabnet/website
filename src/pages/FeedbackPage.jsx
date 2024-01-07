@@ -29,7 +29,7 @@ function FeedbackPage() {
   const { executeRecaptcha } = useGoogleReCaptcha();
 
   const handleReCaptchaVerify = useCallback(async () => {
-    return await executeRecaptcha('yourAction');
+    return await executeRecaptcha('sendFeedback');
   }, [executeRecaptcha]);
 
   const [successShown, successHandlers] = useDisclosure(false);

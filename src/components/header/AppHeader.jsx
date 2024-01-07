@@ -9,7 +9,7 @@ import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 
 const links = [
   { link: '/', label: 'Search' },
-  { link: '/spelling', label: 'Spelling' },
+  // { link: '/spelling', label: 'Spelling' },
   { link: '/feedback', label: 'Feedback' },
   { link: '/about', label: 'About' },
 ];

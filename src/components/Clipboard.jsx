@@ -9,6 +9,7 @@ function Clipboard({ link, description }) {
         value={link}
         size="lg"
         description={description}
+        readOnly
         rightSection={
         <CopyButton value={link} timeout={2000} size="xl">
           {({ copied, copy }) => (

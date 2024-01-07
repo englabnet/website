@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import {
   Button,
   Center,
@@ -18,17 +18,35 @@ import RecaptchaTerms from "../../components/recaptcha/RecaptchaTerms.jsx";
 import axios from "axios";
 import Clipboard from "../../components/Clipboard.jsx";
 import { Link } from "react-router-dom";
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
 function AboutPage() {
   const [words, setWords] = useState([]);
   const [testId, setTestId] = useState(null);
 
+  const [loading, setLoading] = useState(false);
+
+  const { executeRecaptcha } = useGoogleReCaptcha();
+
+  const handleReCaptchaVerify = useCallback(async () => {
+    return await executeRecaptcha('generateTest');
+  }, [executeRecaptcha]);
+
   const generateTest = () => {
-    axios
-      .post('/api/v1/tests', words.map(word => word.id))
-      .then((r) => {
-        setTestId(r.data);
-      });
+    setLoading(true);
+    handleReCaptchaVerify().then(token => {
+      const config = {
+        headers: {
+          recaptcha: token
+        }
+      };
+      axios
+        .post('/api/v1/tests', words.map(word => word.id), config)
+        .then((r) => {
+          setTestId(r.data);
+          setLoading(false);
+        });
+    });
   };
 
   const rows = words.map(word =>
@@ -76,12 +94,12 @@ function AboutPage() {
       <RecaptchaTerms />
       <Space h="md" />
       <Group justify="flex-end">
-        <Button disabled={words.length === 0} onClick={generateTest}>Create Test</Button>
+        <Button disabled={words.length === 0} onClick={generateTest} loading={loading}>Create Test</Button>
       </Group>
       <Modal opened={testId != null} centered title={"Your test has been generated!"} onClose={() => setTestId(null)}>
         <Clipboard link={`https://englab.net/spelling/${testId}`} description={"Here's the link:"}/>
         <Group justify="flex-end">
-          <Link to={`/spelling/${testId}`}>
+          <Link target="_blank" to={`/spelling/${testId}`}>
             <Button>Open Test</Button>
           </Link>
         </Group>
