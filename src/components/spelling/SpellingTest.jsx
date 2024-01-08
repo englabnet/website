@@ -14,7 +14,7 @@ import { IconPlayerPlayFilled } from '@tabler/icons-react';
 import { useForm } from "@mantine/form";
 
 function SpellingTest({ accent, step = 0, onNext = () => {}, onFinish = () => {} }) {
-  const { testId} = useParams();
+  const { testId } = useParams();
   const [stepData, setStepData] = useState();
   const [notFound, setNotFound] = useState(false);
   const [audio, setAudio] = useState({'UK': null, 'US': null});

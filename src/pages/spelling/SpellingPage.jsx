@@ -65,7 +65,7 @@ function AboutPage() {
       <Title order={2}>Spelling Practice</Title>
       <Space h="md" />
       <Text size='md'>
-        Here, you can practise your spelling by creating a new test with the words you often make mistakes in.
+        Here, you can practise your spelling by creating a new test with the words you find most difficult.
         Your test will be given a unique link, so you can come back to it later or share it with other people.
       </Text>
       <Space h="md" />
@@ -79,14 +79,15 @@ function AboutPage() {
             }}
             disabled={words.length >= 50}
           />
-          {rows.length > 0 ? (
+          { rows.length > 0 ? (
             <Table>
               <Table.Tbody>{rows}</Table.Tbody>
-            </Table>) : (
-              <Center h={50}>
-                <Text c='dimmed'>No data</Text>
-              </Center>
-            )}
+            </Table>
+          ) : (
+            <Center h={50}>
+              <Text c='dimmed'>No data</Text>
+            </Center>
+          )}
         </Stack>
       </Center>
       <Space h="md" />
