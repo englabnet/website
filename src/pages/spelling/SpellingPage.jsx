@@ -19,6 +19,8 @@ import axios from "axios";
 import Clipboard from "../../components/Clipboard.jsx";
 import { Link } from "react-router-dom";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
+import MessageDialog from "../../components/MessageDialog.jsx";
+import { useDisclosure } from "@mantine/hooks";
 
 function AboutPage() {
   const [words, setWords] = useState([]);
@@ -31,6 +33,8 @@ function AboutPage() {
   const handleReCaptchaVerify = useCallback(async () => {
     return await executeRecaptcha('generateTest');
   }, [executeRecaptcha]);
+
+  const [recaptchaErrorShown, recaptchaErrorHandlers] = useDisclosure(false);
 
   const generateTest = () => {
     setLoading(true);
@@ -45,6 +49,11 @@ function AboutPage() {
         .then((r) => {
           setTestId(r.data);
           setLoading(false);
+        }).catch(error => {
+          if (error.response.status === 422) {
+            recaptchaErrorHandlers.open();
+            setLoading(false);
+          }
         });
     });
   };
@@ -105,6 +114,12 @@ function AboutPage() {
           </Link>
         </Group>
       </Modal>
+      <MessageDialog
+        type='error'
+        message='reCaptcha validation failed. Please try again later.'
+        opened={recaptchaErrorShown}
+        onClose={recaptchaErrorHandlers.close}
+      />
     </ResponsivePaper>
   );
 }
