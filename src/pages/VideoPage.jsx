@@ -23,15 +23,8 @@ function VideoPage() {
         ...searchValues,
         from,
       },
-    }).then((r) => {
+    }).then(r => {
       setResponse(r.data);
-    }).catch(error => {
-      const response = error.response;
-      if (response.status === 429) {
-        setResponse(null);
-        // if it's 429 Too many requests, then wait a second and try again
-        setTimeout(() => loadVideos(from), 1000);
-      }
     });
 
   useEffect(() => {

@@ -44,12 +44,7 @@ function SpellingTest({ accent, step = 0, onNext = () => {}, onFinish = () => {}
       setAudio({ 'UK': ukAudio, 'US': usAudio });
 
     }).catch(error => {
-      const response = error.response;
-      if (response.status === 429) {
-        setStepData(null);
-        // if it's 429 Too many requests, then wait a second and try again
-        setTimeout(() => loadStep(), 1000);
-      } else if (response.status === 404) {
+      if (error.response.status === 404) {
         setNotFound(true);
       }
     });

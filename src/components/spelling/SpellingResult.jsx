@@ -11,13 +11,6 @@ function SpellingResult({ result = [] }) {
     .get('/api/v1/tests/' + testId)
     .then((r) => {
       setTest(r.data);
-    }).catch(error => {
-      const response = error.response;
-      if (response.status === 429) {
-        setTest(null);
-        // if it's 429 Too many requests, then wait a second and try again
-        setTimeout(() => loadTest(), 1000);
-      }
     });
 
   useEffect(() => {

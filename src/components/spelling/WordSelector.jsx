@@ -55,7 +55,7 @@ function WordSelector({ onSubmit = () => {}, disabled = false }) {
         form.reset();
         timestamp.current = new Date();
         setData([]);
-      }).catch((error) => {
+      }).catch(error => {
         setError(error.response.data.message);
       });
   };
