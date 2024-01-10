@@ -56,7 +56,9 @@ function WordSelector({ onSubmit = () => {}, disabled = false }) {
         timestamp.current = new Date();
         setData([]);
       }).catch(error => {
-        setError(error.response.data.message);
+        if (error.response.status === 404) {
+          setError("The word has not been found");
+        }
       });
   };
 
