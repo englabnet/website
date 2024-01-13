@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { ActionIcon, Button, Center, Group, Loader, Space, Stack, Text, Title } from '@mantine/core';
-import ResponsivePaper from "../../components/ResponsivePaper.jsx";
+import ResponsivePaper from "../../components/responsive/ResponsivePaper.jsx";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import NotFoundPage from "../NotFoundPage.jsx";

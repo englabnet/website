@@ -8,7 +8,7 @@ import axios from "axios";
 import MessageDialog from "../components/MessageDialog.jsx";
 import { useDisclosure } from "@mantine/hooks";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
-import ResponsivePaper from "../components/ResponsivePaper.jsx";
+import ResponsivePaper from "../components/responsive/ResponsivePaper.jsx";
 import RecaptchaTerms from "../components/recaptcha/RecaptchaTerms.jsx";
 
 function FeedbackPage() {

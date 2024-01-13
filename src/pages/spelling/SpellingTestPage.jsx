@@ -4,7 +4,7 @@ import {
   Space,
   Title
 } from '@mantine/core';
-import ResponsivePaper from "../../components/ResponsivePaper.jsx";
+import ResponsivePaper from "../../components/responsive/ResponsivePaper.jsx";
 import SpellingTest from "../../components/spelling/SpellingTest.jsx";
 import AccentControl from "../../components/spelling/AccentControl.jsx";
 import SpellingResult from "../../components/spelling/SpellingResult.jsx";

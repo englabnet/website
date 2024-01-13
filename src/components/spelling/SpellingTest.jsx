@@ -17,7 +17,7 @@ function SpellingTest({ accent, step = 0, onNext = () => {}, onFinish = () => {}
   const { testId } = useParams();
   const [stepData, setStepData] = useState();
   const [notFound, setNotFound] = useState(false);
-  const [audio, setAudio] = useState({'UK': null, 'US': null});
+  const [audio, setAudio] = useState({ 'UK': null, 'US': null });
 
   const [correct, setCorrect] = useState(null);
   const attempts = useRef(0);
@@ -126,6 +126,7 @@ function SpellingTest({ accent, step = 0, onNext = () => {}, onFinish = () => {}
               readOnly={correct}
               {...form.getInputProps('answer')}
               error={correct === false}
+              autocomplete="off"
             />
           </Group>
         </Center>

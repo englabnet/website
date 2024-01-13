@@ -5,7 +5,7 @@ import {
 import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react';
 import SubtitleBlock from './subtitles/SubtitleBlock.jsx';
 import ReactPlayer from "react-player";
-import ResponsivePaper from "./ResponsivePaper.jsx";
+import ResponsivePaper from "./responsive/ResponsivePaper.jsx";
 import classes from './VideoPlayer.module.css';
 
 const youtubeUrl = "https://www.youtube-nocookie.com/watch?v=";

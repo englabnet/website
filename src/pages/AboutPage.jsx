@@ -1,7 +1,7 @@
 import React from 'react';
 import { List, Space, Text, Title } from '@mantine/core';
 import { Link } from "react-router-dom";
-import ResponsivePaper from "../components/ResponsivePaper.jsx";
+import ResponsivePaper from "../components/responsive/ResponsivePaper.jsx";
 
 function AboutPage() {
   return (

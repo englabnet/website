@@ -12,7 +12,7 @@ import {
   Text,
   Title
 } from '@mantine/core';
-import ResponsivePaper from "../../components/ResponsivePaper.jsx";
+import ResponsivePaper from "../../components/responsive/ResponsivePaper.jsx";
 import WordSelector from "../../components/spelling/WordSelector.jsx";
 import RecaptchaTerms from "../../components/recaptcha/RecaptchaTerms.jsx";
 import axios from "axios";

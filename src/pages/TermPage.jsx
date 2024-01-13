@@ -1,6 +1,6 @@
 import React from 'react';
 import { Divider, List, Space, Text, Title } from '@mantine/core';
-import ResponsivePaper from "../components/ResponsivePaper.jsx";
+import ResponsivePaper from "../components/responsive/ResponsivePaper.jsx";
 import { Link } from "react-router-dom";
 
 function TermPage() {
