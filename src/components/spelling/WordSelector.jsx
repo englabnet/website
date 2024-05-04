@@ -37,7 +37,7 @@ function WordSelector({ onSubmit = () => {}, disabled = false }) {
           }
         }).then((r) => {
           if (timestamp.current === currentDate) {
-            setData(r.data.map(word => word.text));
+            setData(r.data);
           }
         })
     }, 500);
