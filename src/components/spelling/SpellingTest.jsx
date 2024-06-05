@@ -56,13 +56,15 @@ function SpellingTest({ accent, step = 0, onNext = () => {}, onFinish = () => {}
       }
     }).then(r => {
       setCorrect(r.data);
-      attempts.current++;
+      if (!r.data) {
+        attempts.current++;
+      }
     });
 
   const nextStep = () => {
     let status = "skipped";
     if (correct) {
-      status = attempts.current === 1 ? "correct" : "mistake";
+      status = attempts.current === 0 ? "correct" : "mistake";
     }
     result.current[stepData.wordId] = status;
 
