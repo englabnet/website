@@ -39,8 +39,8 @@ function SpellingTest({ accent, step = 0, onNext = () => {}, onFinish = () => {}
       setCorrect(null);
 
       const tracks = r.data.pronunciationTracks;
-      const ukAudio = new Audio('/api/v1/' + tracks.find(word => word.variety === 'UK').filepath);
-      const usAudio = new Audio('/api/v1/' + tracks.find(word => word.variety === 'US').filepath);
+      const ukAudio = new Audio('/api/v1/media' + tracks.find(word => word.variety === 'UK').filepath);
+      const usAudio = new Audio('/api/v1/media' + tracks.find(word => word.variety === 'US').filepath);
       setAudio({ 'UK': ukAudio, 'US': usAudio });
 
     }).catch(error => {

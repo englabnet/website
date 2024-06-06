@@ -40,7 +40,7 @@ function SpellingPreviewPage() {
       const filepath = word.pronunciationTracks.find(word => word.variety === accent).filepath;
       return (
         <Group key={word.id} gap="xs">
-          <ActionIcon variant="filled" onClick={() => new Audio('/api/v1/' + filepath).play()}>
+          <ActionIcon variant="filled" onClick={() => new Audio('/api/v1/media' + filepath).play()}>
             <IconPlayerPlayFilled size={18} />
           </ActionIcon>
           <Text key={word.id} size="xl">{word.text}</Text>
