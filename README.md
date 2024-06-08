@@ -1,6 +1,6 @@
 # Website
 
-This is a React application that represents the UI of Englab.
+This is a React application that represents the UI of englab.
 
 ## Technologies Used
 
