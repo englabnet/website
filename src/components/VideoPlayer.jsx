@@ -27,15 +27,15 @@ function VideoPlayer({
   onPrevious = () => {}, onNext = () => {},
 }) {
   const player = useRef(null);
-  const [url, setUrl] = useState(youtubeUrl + video.videoId);
+  const [url, setUrl] = useState(youtubeUrl + video.youtubeVideoId);
   const [autoplay, setAutoplay] = useState(getAutoplaySettingOrDefault(true));
   const [light, setLight] = useState(false);
 
   // just a small adjustment to make sure that the phrase will appear in the video
-  const startTime = Math.floor(video.subtitles[video.index].startTime);
+  const startTime = Math.floor(video.subtitles[video.subtitleEntryIndex].startTime);
   const [currentTime, setCurrentTime] = useState(startTime);
 
-  const videoIdRef = useRef(video.videoId);
+  const videoIdRef = useRef(video.youtubeVideoId);
   const indexRef = useRef(index);
 
   const onReady = () => {
@@ -43,17 +43,17 @@ function VideoPlayer({
   }
 
   useEffect(() => {
-    const hasVideoIdChanged = videoIdRef.current !== video.videoId;
+    const hasVideoIdChanged = videoIdRef.current !== video.youtubeVideoId;
     const hasIndexChanged = indexRef.current !== index;
 
     // if the video id hasn't changed, we just need to play a different part of the video
     if (hasVideoIdChanged) {
-      setUrl(youtubeUrl + video.videoId);
+      setUrl(youtubeUrl + video.youtubeVideoId);
     } else if (hasIndexChanged) {
       player.current.seekTo(startTime, 'seconds');
     }
 
-    videoIdRef.current = video.videoId;
+    videoIdRef.current = video.youtubeVideoId;
     indexRef.current = index;
 
     setCurrentTime(startTime);

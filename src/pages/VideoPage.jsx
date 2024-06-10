@@ -20,7 +20,8 @@ function VideoPage() {
   const loadVideos = (from = 0) => axios
     .get('/api/v1/search', {
       params: {
-        ...searchValues,
+        phrase: searchValues.phrase,
+        variety: searchValues.variety !== "ALL" ? searchValues.variety : null,
         from,
       },
     }).then(r => {
