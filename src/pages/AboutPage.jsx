@@ -16,9 +16,17 @@ function AboutPage() {
       <Title order={3}>Functionality</Title>
       <Space h="xs" />
       <Text>
-        For now, I&apos;ve implemented only a video search feature that allows you to find specific words or phrases in YouTube videos.
-        It&apos;s quite simple, but useful enough if you want to check pronunciation or find sentence examples.
+        For now, I&apos;ve implemented only two features:
       </Text>
+      <List>
+        <List.Item>
+          A video search feature that allows you to find specific words or phrases in YouTube videos.
+          It&apos;s quite simple but useful if you want to check pronunciation or find sentence examples.
+        </List.Item>
+        <List.Item>
+          A spelling trainer that enables users to create tests with words they find most difficult and practice.
+        </List.Item>
+      </List>
       <Space h="xs" />
       <Text>
         Here&apos;s a list of things I&apos;m going to add in the future:
