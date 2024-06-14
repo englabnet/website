@@ -1,12 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
 import {
-  AspectRatio, Button, Group, Stack, Switch, Text, Tooltip,
+  AspectRatio, Button, em, Group, Stack, Switch, Text, Tooltip,
 } from '@mantine/core';
 import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react';
 import SubtitleBlock from './subtitles/SubtitleBlock.jsx';
 import ReactPlayer from "react-player";
 import ResponsivePaper from "./responsive/ResponsivePaper.jsx";
 import classes from './VideoPlayer.module.css';
+import { englishVarietyToIcon } from "../utils/icons.js";
+import { useMediaQuery } from "@mantine/hooks";
 
 const youtubeUrl = "https://www.youtube-nocookie.com/watch?v=";
 
@@ -26,6 +28,8 @@ function VideoPlayer({
   disablePrevious = true, disableNext = false,
   onPrevious = () => {}, onNext = () => {},
 }) {
+  const isMobile = useMediaQuery(`(max-width: ${em(800)})`);
+
   const player = useRef(null);
   const [url, setUrl] = useState(youtubeUrl + video.youtubeVideoId);
   const [autoplay, setAutoplay] = useState(getAutoplaySettingOrDefault(true));
@@ -105,14 +109,20 @@ function VideoPlayer({
           </Group>
         </AspectRatio>
         <Group w="100%" miw={350} p={5} justify="space-between" gap="xs">
-          <Tooltip position="bottom" withArrow openDelay={500} label="Previous video">
-            <Button onClick={onPrevious} disabled={disablePrevious} variant="default">
-              <IconChevronLeft />
-            </Button>
-          </Tooltip>
+          <Group gap="xs">
+            <Tooltip position="bottom" withArrow openDelay={500} label="Previous video">
+              <Button maw="60px" size="xs" onClick={onPrevious} disabled={disablePrevious} variant="default">
+                <IconChevronLeft />
+              </Button>
+            </Tooltip>
+            <Text size="xs">
+              {isMobile ? englishVarietyToIcon(video.variety) : `${englishVarietyToIcon(video.variety)} ${video.variety} accent`}
+            </Text>
+          </Group>
           <Group justify="flex-end" gap="xs">
             <Switch
               classNames={{ label: classes.switchLabel }}
+              size="xs"
               checked={autoplay}
               label="Autoplay"
               onChange={event => {
@@ -121,7 +131,7 @@ function VideoPlayer({
                 localStorage.setItem(autoplaySetting, checked.toString());
               }}
             />
-            <Button variant="default" onClick={() => {
+            <Button variant="default" size="xs" onClick={() => {
               player.current.seekTo(startTime, 'seconds');
               const internalPlayer = player.current.getInternalPlayer();
               if (internalPlayer) {
@@ -129,7 +139,7 @@ function VideoPlayer({
               }
             }}>Replay</Button>
             <Tooltip position="bottom" withArrow openDelay={500} label="Next video">
-              <Button onClick={onNext} disabled={disableNext} variant="default">
+              <Button maw="60px" size="xs" onClick={onNext} disabled={disableNext} variant="default">
                 <IconChevronRight />
               </Button>
             </Tooltip>
